@@ -54,7 +54,16 @@ The paper distinguishes four capabilities human oversight relies on. The four-wa
 - **independent judgment** — reaching a conclusion the system did not supply
 - **override capacity** — acting against a confident machine
 
-Error detection and override capacity can be assessed with existing methods. Conceptual understanding can be assessed partially. Independent judgment on genuinely novel questions is not assessable by anything here, and the templates say so rather than substituting a proxy.
+The four records implement the paper's proposed instruments to different degrees. Reading from capability to record:
+
+- **error detection** — implemented. The paper proposes seeded incorrect outputs with detection rate tracked over time; record 03 does this.
+- **override capacity** — the paper proposes seeded *confidently* incorrect outputs with override rate read as a distribution. Record 03 records confidence, detection and override separately, and records cases where a reviewer noticed and let the item through anyway. That last case is a different failure from not noticing, with a different remedy.
+- **conceptual understanding** — the paper proposes unassisted comprehension assessment on the behaviour of the supervised system, at intake and periodically, and calls it partially tractable. Record 01 carries this where the organisation states it as a required skill.
+- **independent judgment** on genuinely novel questions — the paper is explicit that no instrument it proposes measures this directly, and neither does anything here.
+
+Record 04 sits across the set rather than under one capability. Measuring performance both with and without the system tracks conceptual understanding, error detection and independent diagnostic ability at once: assisted performance can approach specialist level while unassisted capability is unchanged, and only the second measurement reveals it. The record therefore holds two results side by side rather than one score.
+
+Record 02 measures no capability. It records the conditions the other records were obtained under.
 
 An assurance requirement needs an indicator, a threshold, and a consequence attaching to the result. Some thresholds invite gaming. Override rate is the clear case: a reviewer who knows the rate is tracked can raise it without judging any better. For those the templates record a distribution instead of a target, and the consequence attaches to the change rather than the level: a distribution that shifts between rounds, or a reviewer well outside the spread, is what should prompt action.
 
@@ -77,6 +86,8 @@ The CSVs are the source of truth and render as tables in the browser. The record
 **Start here.** If you are doing one thing, complete the competence matrix for one system and one reviewer group. The other three records answer questions the first one raises: under what conditions the result was obtained, whether anyone is actually catching planted errors, and whether people can still do the work without the system.
 
 **Status.** These templates have not been run in production anywhere. Reports from anyone who tries them are welcome via issues.
+
+A first round typically returns few determinations. Criteria are being stated for the first time, distributions have nothing to be compared against, and some assessments will have been run under conditions that do not support an inference to operation.
 
 All example values are illustrative and marked as such. They show the shape of a completed record; they are not findings about any organisation.
 

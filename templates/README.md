@@ -17,9 +17,9 @@ One row per reviewer per required skill. The core record.
 | `reviewer_id` | Pseudonymous. These records concern individuals; identifiability should be the minimum the purpose requires. |
 | `role` | The oversight function, not the job title. |
 | `system_scope` | Which system or capability tier this row covers. Competence is not general. |
-| `required_skill` | Stated as something a person does, not something they are. "Detects an inconsistent statistical argument" rather than "familiar with statistics". |
+| `required_skill` | Stated as something a person does, not something they are. "Detects an inconsistent statistical argument" rather than "familiar with statistics". Conceptual understanding belongs here too, stated the same way — "explains why the system produced a given output" rather than "understands the model". |
 | `required_level` | Organisation's own scale. |
-| `assessment_method` | What was actually done. |
+| `assessment_method` | What was actually done. For conceptual understanding the paper proposes unassisted comprehension assessment on the behaviour of the supervised system, at intake and periodically. |
 | `assessment_date` / `next_due_date` | Interval is the organisation's to set. State it rather than leaving it implicit. |
 | `criterion` | What counted as meeting the requirement, set before the assessment was run. A result with no stated criterion cannot be judged. |
 | `result` | The raw result. Record it whether or not it met the criterion. |
@@ -58,6 +58,9 @@ Notes on running it:
 - Flawed outputs should be wrong in ways that are plausible, not obviously broken. An obviously broken output measures attention, not judgment.
 - Record the result as a distribution across reviewers, not as a pass rate against a target. A tracked override threshold gives reviewers a reason to override more, which improves the number without improving the judgment.
 - Record whether reviewers were informed that the protocol was running.
+- Present some flawed outputs as confident. Detection and override are different capabilities: a reviewer who does not notice and one who notices and lets the item through have failed differently, and `noticed_not_acted` is where the second is recorded.
+- Record detection and override as separate distributions rather than one acceptance figure.
+- A record that a reviewer noticed and did not act is a different kind of record from a failure to notice. It carries more weight against the individual, and the purpose limitation in the workpaper matters more for it.
 - Use `interpretation` to state what the distribution appears to show and what would change the reading.
 
 ## skill-preserving-modes
