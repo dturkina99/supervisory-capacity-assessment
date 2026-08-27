@@ -57,11 +57,11 @@ The paper distinguishes four capabilities human oversight relies on. The four-wa
 The four records implement the paper's proposed instruments to different degrees. Reading from capability to record:
 
 - **error detection** — implemented. The paper proposes seeded incorrect outputs with detection rate tracked over time; **record 03** does this.
-- **override capacity** — the paper proposes seeded *confidently* incorrect outputs with override rate read as a distribution.** Record 03** records confidence, detection and override separately, and records cases where a reviewer noticed and let the item through anyway. That last case is a different failure from not noticing, with a different remedy.
-- **conceptual understanding** — the paper proposes unassisted comprehension assessment on the behaviour of the supervised system, at intake and periodically, and calls it partially tractable.** Record 01** carries this where the organisation states it as a required skill.
+- **override capacity** — the paper proposes seeded *confidently* incorrect outputs with override rate read as a distribution.**Record 03** records confidence, detection and override separately, and records cases where a reviewer noticed and let the item through anyway. That last case is a different failure from not noticing, with a different remedy.
+- **conceptual understanding** — the paper proposes unassisted comprehension assessment on the behaviour of the supervised system, at intake and periodically, and calls it partially tractable.**Record 01** carries this where the organisation states it as a required skill.
 - **independent judgment** on genuinely novel questions — the paper is explicit that **no instrument it proposes measures this directly, and neither does anything here.**
 
-**Record 04 ** sits across the set rather than under one capability. Measuring performance both with and without the system tracks conceptual understanding, error detection and independent diagnostic ability at once: assisted performance can approach specialist level while unassisted capability is unchanged, and only the second measurement reveals it. The record therefore holds two results side by side rather than one score.
+**Record 04** sits across the set rather than under one capability. Measuring performance both with and without the system tracks conceptual understanding, error detection and independent diagnostic ability at once: assisted performance can approach specialist level while unassisted capability is unchanged, and only the second measurement reveals it. The record therefore holds two results side by side rather than one score.
 
 **Record 02** measures no capability. It records the conditions the other records were obtained under.
 
