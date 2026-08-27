@@ -1,0 +1,3 @@
+reviewer_id,period,items_reviewed,hours_total,longest_continuous_stretch,break_pattern,concurrent_scenarios,task_difficulty_note,interpretation,notes
+ILLUSTRATIVE-01,2026-W28,142,28,1h 30m,15 min per 90 min,2,"Routine cases, verification straightforward","Within the pattern set for this queue — 28 hours, breaks every 90 minutes.",
+ILLUSTRATIVE-02,2026-W28,210,32,5h 00m,None recorded,4,Two cases required independent replication of a statistical result,32 hours with a five-hour unbroken stretch and four concurrent scenarios. Any assessment result from this week should be read with that in view.,Verification complexity high in two cases

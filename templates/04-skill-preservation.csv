@@ -1,0 +1,2 @@
+reviewer_id,exercise_date,exercise_type,system_available,performance,comparison_to_assisted,interval_since_last,interpretation,notes
+ILLUSTRATIVE-01,2026-08-12,"Degraded-mode exercise, usual tooling unavailable",No,14/20,Assisted 17/20 on same case set,None — first exercise,"14/20 unassisted against 17/20 assisted on the same case set. Single observation with no prior measurement, so it establishes a starting point and shows no trend.",
