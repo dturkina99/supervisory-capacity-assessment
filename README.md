@@ -58,11 +58,13 @@ The paper distinguishes four capabilities human oversight relies on. The four-wa
 - **independent judgment** — reaching a conclusion the system did not supply
 - **override capacity** — acting against a confident machine
 
-The four records implement the paper's proposed instruments to different degrees. Reading from capability to record:
+![Capabilities, records and the scorecard](docs/capabilities-to-records.png)
+
+Records 01 to 04 implement the paper's proposed instruments to different degrees. Reading from capability to record:
 
 - **error detection** — implemented. The paper proposes seeded incorrect outputs with detection rate tracked over time; **record 03** does this.
-- **override capacity** — the paper proposes seeded *confidently* incorrect outputs with override rate read as a distribution.**Record 03** records confidence, detection and override separately, and records cases where a reviewer noticed and let the item through anyway. That last case is a different failure from not noticing, with a different remedy.
-- **conceptual understanding** — the paper proposes unassisted comprehension assessment on the behaviour of the supervised system, at intake and periodically, and calls it partially tractable.**Record 01** carries this where the organisation states it as a required skill.
+- **override capacity** — the paper proposes seeded *confidently* incorrect outputs with override rate read as a distribution. **Record 03** records confidence, detection and override separately, and records cases where a reviewer noticed and let the item through anyway. That last case is a different failure from not noticing, with a different remedy.
+- **conceptual understanding** — the paper proposes unassisted comprehension assessment on the behaviour of the supervised system, at intake and periodically, and calls it partially tractable. **Record 01** carries this where the organisation states it as a required skill.
 - **independent judgment** on genuinely novel questions — the paper is explicit that **no instrument it proposes measures this directly, and neither does anything here.**
 
 **Record 04** sits across the set rather than under one capability. Measuring performance both with and without the system tracks conceptual understanding, error detection and independent diagnostic ability at once: assisted performance can approach specialist level while unassisted capability is unchanged, and only the second measurement reveals it. The record therefore holds two results side by side rather than one score.
@@ -71,29 +73,39 @@ The four records implement the paper's proposed instruments to different degrees
 
 An assurance requirement needs an indicator, a threshold, and a consequence attaching to the result. Some thresholds invite gaming. Override rate is the clear case: a reviewer who knows the rate is tracked can raise it without judging any better. For those the templates record a distribution instead of a target, and the consequence attaches to the change rather than the level: a distribution that shifts between rounds, or a reviewer well outside the spread, is what should prompt action.
 
+No criterion transfers between processes. What counts as adequate depends on the decision, the consequence of a wrong output, and how likely anyone is to catch it downstream. Set it for each process, before the assessment runs.
+
 ## Contents
 
 | File | Purpose |
 |---|---|
-| `templates/01-competence-matrix.csv` | Can each reviewer do what the role requires? Skill, criterion, method, result, whether met, conditions |
+| `templates/01-competence-matrix.csv` | Can each reviewer do what the role requires? Skill, criterion and when it was set, result, whether met, who assessed, and any interim restriction |
 | `templates/02-time-on-task.csv` | Under what conditions were they working? Hours, unbroken stretches, breaks, concurrent load |
 | `templates/03-oversight-stress-test.csv` | Do they catch errors that are deliberately planted? Results as a distribution, with conditions |
 | `templates/04-skill-preservation.csv` | Can they still do it without the system? Unassisted beside assisted |
-| `templates/supervisory-capacity-records.xlsx` | The four above as one workbook, plus a scorecard tab completed by hand |
+| `templates/05-production-evidence.csv` | What does the live process already show? Overturn rate, appeals received and upheld — observed, not assessed |
+| `templates/supervisory-capacity-records.xlsx` | The five records above as one workbook, plus a scorecard tab completed by hand |
 | `templates/workpaper-supervisory-capacity.md` | Control-testing workpaper in internal-audit format |
 | `templates/README.md` | Field definitions and usage notes |
 | `dataset/README.md` | Pointer to the deposited coding data |
 | `CITATION.cff` | Citation metadata; cite the paper rather than the repository |
+| `docs/capabilities-to-records.png` | The map above: capabilities, the records that test them, and the scorecard they land on |
+
+Record 05 is different in kind from the other four. It has no criterion and reaches no verdict: it records what the live process already shows — how often reviewers overturn, how often an appeal succeeds. Where a wrong output surfaces through an existing channel, that channel is evidence about the same control and costs nothing to collect.
+
+Every record carries `round_id`. The instrument reads change between rounds rather than performance against a target, so a record without a round cannot be compared to anything. Process-level context — the decision under oversight, what the system supplies, the consequence of a wrong output — is recorded on the scorecard.
 
 The CSVs are the source of truth and render as tables in the browser. The record sheets in the workbook are generated from them; if they differ, the CSVs are correct. The scorecard tab is not generated and is filled by hand.
 
-**Start here.** If you are doing one thing, complete the competence matrix for one system and one reviewer group. The other three records answer questions the first one raises: under what conditions the result was obtained, whether anyone is actually catching planted errors, and whether people can still do the work without the system.
+These records describe state: what was assessed, under what conditions, and what the evidence supports. What follows from a result — remediation, restriction, coverage of the rest of the population, a revised criterion — is decided and recorded in the workpaper.
+
+**Start here.** If you are doing one thing, complete the competence matrix for one system and one reviewer group. The other records answer questions the first one raises: under what conditions the result was obtained, whether anyone is actually catching planted errors, whether people can still do the work without the system, and what the live process already shows.
 
 **Status.** These templates have not been run in production anywhere. Reports from anyone who tries them are welcome via issues.
 
 A first round typically returns few determinations. Criteria are being stated for the first time, distributions have nothing to be compared against, and some assessments will have been run under conditions that do not support an inference to operation.
 
-All example values are illustrative and marked as such. They show the shape of a completed record; they are not findings about any organisation.
+All example values are illustrative and marked as such. They describe one scenario — a consumer lender where twelve analysts review automated credit declines before issue — so that the fields have a concrete referent. They are not findings about any organisation.
 
 Adopting these templates creates records about identified individuals. See *Ethics and employment obligations* above before use, and do not commit completed records to any public repository. Git history is additive, and deleting a file later does not remove it.
 
