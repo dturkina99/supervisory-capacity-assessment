@@ -91,7 +91,7 @@ No criterion transfers between processes. What counts as adequate depends on the
 | `CITATION.cff` | Citation metadata; cite the paper rather than the repository |
 | `docs/capabilities-to-records.png` | The map above: capabilities, the records that test them, and the scorecard they land on |
 
-Record 05 is different in kind from the other four. It has no criterion and reaches no verdict: it records what the live process already shows — how often reviewers overturn, how often an appeal succeeds. Where a wrong output surfaces through an existing channel, that channel is evidence about the same control and costs nothing to collect.
+**Record 05** is different in kind from the other four. It has no criterion and reaches no verdict: it records what the live process already shows — how often reviewers overturn, how often an appeal succeeds. Where a wrong output surfaces through an existing channel, that channel is evidence about the same control and costs nothing to collect.
 
 Every record carries `round_id`. The instrument reads change between rounds rather than performance against a target, so a record without a round cannot be compared to anything. Process-level context — the decision under oversight, what the system supplies, the consequence of a wrong output — is recorded on the scorecard.
 
