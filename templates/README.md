@@ -2,6 +2,10 @@
 
 Five record types. Use whichever fit; they are independent. Records 01 to 04 are assessments; record 05 is observation of the live process.
 
+The small function track, the second tab, is a separate path for an oversight function of roughly three to six people reviewing work with no independent right answer. It uses none of the five records below. See the root README.
+
+The round register, the first tab of the workbook, is completed before a round runs and not edited afterwards. It fixes the criterion and the date it was fixed, the triggers that invalidate it, the population and the rule by which it was selected, who builds the seeded set, who administers and who scores, whether any of those roles are held by one person, the conditions planned, and what follows a poor result. Nothing below is readable as evidence without it.
+
 Every record carries `round_id`. The instrument reads change between rounds rather than performance against a target, so a record without a round cannot be compared to anything. The workbook's "How it fits together" tab shows which capability each one tests and which is not reached; the same diagram is at `docs/capabilities-to-records.png`.
 
 The illustrative values throughout describe one scenario: a consumer lender where twelve analysts review automated credit declines before they are issued. It is there so the fields have a concrete referent. Replace it with your own.

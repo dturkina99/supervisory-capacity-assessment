@@ -2,10 +2,12 @@
 
 Control testing template. Format follows internal-audit convention so the record sits alongside existing control documentation rather than beside it.
 
+This workpaper carries the control description, the purpose limitation, the design conclusion and the exceptions. It does not restate scope, results or population: those are on the scorecard tab of `supervisory-capacity-records.xlsx` for the round, and the round register tab records what was fixed before the round ran.
+
 ---
 
 **Control reference:** [ ]
-**Period:** [ ]
+**Round:** [ ] — **Period:** [ ]
 **Prepared by:** [ ] — **Date:** [ ]
 **Reviewed by:** [ ] — **Date:** [ ]
 
@@ -21,56 +23,40 @@ Consequential decisions are allocated to human judgment. If that judgment cannot
 
 Two features of AI-assisted work make this more than theoretical. Assisted performance can remain high while unassisted capability declines, so a measure taken with the tool present may not detect the change. And a confident, fluent, incorrect output is harder to challenge than an obviously poor one.
 
-## 3. Scope
+## 3. Purpose limitation
 
-**Purpose limitation.** This assessment is conducted for control-testing purposes. Results are not used for individual performance management unless separately agreed and disclosed to the persons assessed. State which applies: ______
+This assessment is conducted for control-testing purposes. Results are not used for individual performance management unless separately agreed and disclosed to the persons assessed in advance.
 
-| Item | Entry |
-|---|---|
-| Systems in scope | |
-| Oversight functions in scope | |
-| Population of reviewers | |
-| Capabilities assessed | |
-| Capabilities not assessed, and why | |
+State which applies: ______
 
-Independent judgment on novel questions is not assessable by the methods below. State that in the last row rather than substituting a proxy for it.
+Independent judgment on novel questions is not assessable by these methods. It is recorded as not assessed on the scorecard rather than proxied.
 
 ## 4. Control design
 
-| Element | Design | Evidence produced |
-|---|---|---|
-| Competence specified | Required capabilities stated as observable performance, per system scope | Competence matrix |
-| Assessment at intake | Method stated; conditions recorded | Assessment record |
-| Reassessment | Interval stated; triggers stated (system change, scope change, new assignee) | Assessment record |
-| Conditions of work recorded | Hours, continuous stretches, breaks | Time-on-task log |
-| Consequence of a failed assessment | Stated: reassignment, remediation, or limitation on reliance | Remediation record |
+Assessed independently of whether the control operated in the period.
 
-## 5. Test performed
-
-| Test | Method | Sample | Result |
+| Element | Design | Evidenced from | Adequate? |
 |---|---|---|---|
-| Competence records exist and are current | Inspection | | |
-| Assessment conditions recorded | Inspection | | |
-| Seeded-error detection | Reperformance | | |
-| Override behaviour under low system confidence | Reperformance | | |
-| Consequence applied where assessment not met | Inspection | | |
+| Competence specified | Required capabilities stated as observable performance, per system scope | Record 01, `required_skill` / `required_level` | |
+| Criterion set in advance | Criterion and the date it was fixed recorded before the round | Register; record 01 `criterion` / `criterion_set_date` | |
+| Independence of roles | Set builder, administrator and scorer separated; separations absent are named | Register; record 01 `assessor_independence` | |
+| Assessment at intake | Method stated; conditions recorded | Record 01, `assessment_method` / `conditions` | |
+| Reassessment | Interval stated; triggers stated (system change, scope change, new assignee) | Register; record 01 `next_due_date` | |
+| Conditions of work recorded | Hours, continuous stretches, breaks, concurrent load | Record 02 | |
+| Consequence of a failed assessment | Stated before the result: reassignment, remediation, or limitation on reliance | Register; record 01 `remediation` / `interim_restriction` | |
+| Authority to act | Reviewers can halt the process they oversee, on a stated authority | Record 01, `authority_to_halt` | |
+| Unassisted capability measured | Performance recorded with the system and without it, at a stated interval | Record 04 | |
 
-## 6. Results
+## 5. Results
 
-Record seeded-error detection and override behaviour as distributions across the reviewer population, with the conditions under which each was obtained. A single pass rate against a target is not appropriate for override behaviour: reviewers who know the rate is tracked have an incentive to raise it without any change in judgment.
+See the scorecard for round [ ]. Summarise here only what bears on the conclusion below.
 
-| Measure | Distribution | Conditions | Notes |
-|---|---|---|---|
-| Seeded-error detection | | | |
-| Override under low confidence | | | |
-| Unassisted vs assisted performance | | | |
-
-## 7. Exceptions and remediation
+## 6. Exceptions and remediation
 
 | Ref | Exception | Cause | Action | Owner | Due |
 |---|---|---|---|---|---|
 
-## 8. Conclusion
+## 7. Conclusion
 
 | | |
 |---|---|
@@ -78,15 +64,17 @@ Record seeded-error detection and override behaviour as distributions across the
 | Operating effectiveness | Effective / Deficient / Not tested — basis: |
 | Capabilities not covered by this test | |
 
+A design conclusion can be reached on the register and the control design table alone. An operating effectiveness conclusion requires a round with a criterion fixed in advance and stated separations; where either is missing, the correct entry is Not tested.
+
 ---
 
 ## Notes on use
 
-**Seeded-error testing is a study on staff.** It involves deception and should not be run as routine quality assurance. Use synthetic or sandboxed cases rather than live consequential decisions, disclose in debrief, and route the design through whatever review applies to research on employees. Where the workflow cannot be simulated, structured interviews about specific recent instances are the recognised alternative. Record in section 5 which was used and what review the design received.
+**Seeded-error testing is a study on staff.** It involves deception and should not be run as routine quality assurance. Use synthetic or sandboxed cases rather than live consequential decisions, disclose in debrief, and route the design through whatever review applies to research on employees. Where the workflow cannot be simulated, structured interviews about specific recent instances are the recognised alternative. Record on the register which was used and what review the design received.
 
 **Interval.** No interval is recommended here. Set one and state it.
 
-**Population.** Assessment results support inferences only about a population resembling the one assessed. If the assessment is run on senior reviewers in unhurried conditions and the operating population is different, say so in section 6 rather than reporting the number alone.
+**Population.** Assessment results support inferences only about a population resembling the one assessed. If the assessment is run on senior reviewers in unhurried conditions and the operating population is different, the scorecard says so rather than reporting the number alone.
 
 **Regulatory mapping.** Where the organisation deploys high-risk AI systems in the EU, Article 26(2) of Regulation (EU) 2024/1689 requires that natural persons assigned to human oversight have the necessary competence, training and authority. This workpaper produces evidence relevant to that obligation. It is not a compliance opinion.
 
