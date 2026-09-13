@@ -30,6 +30,16 @@ Some of what follows may transfer, though none of it has been tried there. Capab
 
 What such a limit looks like in practice is already on the record. Investigating the OpenAI-Hugging Face incident in August 2026, [METR and Redwood Research](https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/) had three researchers, six days and roughly 1,300 agent transcripts. They delegated the analysis to AI agents they called often unreliable, could not spot-check the output at the scale involved, and could not rule out being misled by the model doing the reading. They disclosed this themselves.
 
+The workbook carries a separate track for that case. See below.
+
+## The small function track
+
+Everything below assumes an output that can be judged right or wrong, and enough people to separate who builds a test from who takes it. An oversight function of three to six people reviewing work with no independent right answer has neither.
+
+For that case the workbook carries a separate track. It registers the engagement before the work starts, records the volume against the time available, states what portion of the analysis was delegated and to what, names the circumstances under which a problem would have gone unnoticed, and commits to publishing the result whichever way it goes. No seeded errors, no criterion, no per-individual performance record, and correspondingly none of the consultation and data-protection obligations that attach to the other records.
+
+What it produces is a declaration rather than an assessment: an account of what the work reached and what it could not. That is weaker than a measured result and stronger than an unqualified finding, and at this size it is what is available.
+
 ## What this is not
 
 This repository contributes no measurement science. Automation bias has been studied in the human factors and clinical decision-support literature for decades: a systematic review covering 1983–2015 found the effect present in single tasks, typically diagnosis rather than monitoring, and where verification of the automated output was itself complex. It concluded that automation bias is associated with cognitive load rather than uniquely with multitasking (Lyell & Coiera, *Journal of the American Medical Informatics Association* 24(2), 2017, [doi.org/10.1093/jamia/ocw105](https://doi.org/10.1093/jamia/ocw105)). Practitioner guidance on studying over-reliance gives sample sizes and design cautions. Commercially available tooling already monitors override rate, time on decision, variance between reviewers, performance on seeded cases and override accuracy. Published human-in-the-loop policy templates already cover initial and refresher training and per-reviewer training records.
@@ -87,13 +97,13 @@ No criterion transfers between processes. What counts as adequate depends on the
 
 | File | Purpose |
 |---|---|
+| `templates/supervisory-capacity-records.xlsx` | **Start here.** Round register, the small function track, the five records, the capability map and a scorecard, in one workbook |
 | `templates/01-competence-matrix.csv` | Can each reviewer do what the role requires? Skill, criterion and when it was set, result, whether met, who assessed, and any interim restriction |
 | `templates/02-time-on-task.csv` | Under what conditions were they working? Hours, unbroken stretches, breaks, concurrent load |
 | `templates/03-oversight-stress-test.csv` | Do they catch errors that are deliberately planted? Results as a distribution, with conditions |
 | `templates/04-skill-preservation.csv` | Can they still do it without the system? Unassisted beside assisted |
 | `templates/05-production-evidence.csv` | What does the live process already show? Overturn rate, appeals received and upheld — observed, not assessed |
-| `templates/supervisory-capacity-records.xlsx` | The five records above as one workbook, plus a scorecard tab completed by hand |
-| `templates/workpaper-supervisory-capacity.md` | Control-testing workpaper in internal-audit format |
+| `templates/workpaper-supervisory-capacity.md` | Control-testing workpaper: control description, purpose limitation, design conclusion, exceptions |
 | `templates/README.md` | Field definitions and usage notes |
 | `dataset/README.md` | Pointer to the deposited coding data |
 | `CITATION.cff` | Citation metadata; cite the paper rather than the repository |
@@ -103,11 +113,13 @@ No criterion transfers between processes. What counts as adequate depends on the
 
 Every record carries `round_id`. The instrument reads change between rounds rather than performance against a target, so a record without a round cannot be compared to anything. Process-level context — the decision under oversight, what the system supplies, the consequence of a wrong output — is recorded on the scorecard.
 
+The round register is completed before a round runs and not edited afterwards. It fixes the criterion and the date it was fixed, the triggers that invalidate it, the population and how it was selected, who builds the seeded set, who administers and who scores, and what follows a poor result. A result produced without it can be reported but not audited: nothing distinguishes a criterion set in advance from one chosen after the numbers were seen.
+
 The CSVs are the source of truth and render as tables in the browser. The record sheets in the workbook are generated from them; if they differ, the CSVs are correct. The scorecard tab is not generated and is filled by hand.
 
 These records describe state: what was assessed, under what conditions, and what the evidence supports. What follows from a result — remediation, restriction, coverage of the rest of the population, a revised criterion — is decided and recorded in the workpaper.
 
-**Start here.** If you are doing one thing, complete the competence matrix for one system and one reviewer group. The other records answer questions the first one raises: under what conditions the result was obtained, whether anyone is actually catching planted errors, whether people can still do the work without the system, and what the live process already shows.
+**Start here.** Open `templates/supervisory-capacity-records.xlsx`. Its first tab lists what each of the others is for. Complete the round register first and the scorecard last. If you are doing one thing, complete the register and the competence matrix for one system and one reviewer group; the other records answer questions the first one raises.
 
 **Status.** These templates have not been run in production anywhere. Reports from anyone who tries them are welcome via issues.
 
