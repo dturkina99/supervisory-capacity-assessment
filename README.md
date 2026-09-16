@@ -22,6 +22,13 @@ A control that is asserted but never tested provides no assurance. These templat
 
 The paper examines frontier AI safety frameworks, which govern model developers. These templates are built for deployers of high-risk systems, who face the same question under different law. The two are separate regimes and often separate companies; what they share is that the competence of the human overseer is stated rather than established.
 
+## Where to start
+
+![Two questions, routing to a declaration or a full round](docs/where-to-start.png)
+
+The two questions are asked per decision type, not per organisation. A function with
+some checkable decisions and some not asks twice and gets two answers.
+
 ## Evaluators
 
 The proposals now in circulation would create a new human control: [independent evaluators inside frontier labs with employee-like access](https://darioamodei.com/post/we-must-pace-the-frontier), and [framework commitments turned into safety bars enforced by third-party auditors](https://openai.com/index/an-alien-mind/). Both describe what such people would be given access to. Neither specifies what they must be able to do, or how anyone would know it still holds.
