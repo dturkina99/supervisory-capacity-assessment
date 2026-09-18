@@ -1,10 +1,8 @@
 # Supervisory Capacity Assessment
 
-Audit-format templates for recording assessments of the people assigned to oversee an AI system. 
+**How to test and evidence the human oversight control in an AI system.** Audit-format templates for showing that human-in-the-loop review works, for EU AI Act Article 26(2) and for internal control testing generally.
 
-**Human supervisory capacity is a proposed safety dependency.** Frontier safety frameworks and the EU AI Act both assign consequential decisions to human reviewers. Neither specifies how an organisation would know those reviewers can still detect the errors they are there to catch.
-
-This repository holds preliminary, non-validated record formats for the components that can be assessed, and says which cannot.
+Governance frameworks and the EU AI Act both assign consequential decisions to human reviewers. Neither specifies how an organisation would know those reviewers can still detect the errors they are there to catch. This repository holds preliminary, non-validated record formats for the components that can be assessed, and says which cannot.
 
 **Paper:** Turkina, D. (2026). *The Unmonitored Dependency: Human Supervisory Capacity as an Assurance Target in Frontier AI Safety Frameworks.* SSRN 7248205. [doi.org/10.2139/ssrn.7248205](https://doi.org/10.2139/ssrn.7248205)
 
