@@ -32,3 +32,18 @@ preferred-citation:
   year: 2026
   doi: 10.2139/ssrn.7248205
   url: "https://doi.org/10.2139/ssrn.7248205"
+version: 1.0.0
+date-released: "2026-10-12"
+repository-code: "https://github.com/dturkina99/supervisory-capacity-assessment"
+references:
+  - type: generic
+    title: What a standard specifies about people
+    authors:
+      - family-names: Turkina
+        given-names: Diana
+        orcid: "https://orcid.org/0009-0004-8584-9376"
+    year: 2026
+    version: "1.0"
+    doi: 10.5281/zenodo.23311590
+    url: "https://doi.org/10.5281/zenodo.23311590"
+    notes: Companion essay on prEN 18229-3 and prEN 18228.

@@ -8,6 +8,10 @@ Governance frameworks and the EU AI Act both assign consequential decisions to h
 
 **Data:** Coding sheet, term-search log and text-layer manifest at [doi.org/10.5281/zenodo.22075225](https://doi.org/10.5281/zenodo.22075225), CC BY 4.0.
 
+**Essay:** Turkina, D. (2026). *What a standard specifies about people.* A close reading of prEN 18229-3 (human oversight) and prEN 18228 (AI risk management). PDF in [`docs/`](docs/what-a-standard-specifies.pdf); Zenodo, [doi.org/10.5281/zenodo.23311590](https://doi.org/10.5281/zenodo.23311590).
+
+**Use it in the browser:** [open the document builder](https://dturkina99.github.io/supervisory-capacity-assessment/) to write the small function track, the round register or the workpaper and download it as PDF, Word, Markdown or Excel. Nothing you type leaves the page. Document builder version 0.1 (preview); each builder release is pinned at `docs/vX.Y/`.
+
 Written in a personal capacity; does not represent any employer.
 
 ---
@@ -44,6 +48,16 @@ Everything below assumes an output that can be judged right or wrong, and enough
 For that case the workbook carries a separate track. It registers the engagement before the work starts, records the volume against the time available, states what portion of the analysis was delegated and to what, names the circumstances under which a problem would have gone unnoticed, and commits to publishing the result whichever way it goes. No seeded errors, no criterion, no per-individual performance record, and correspondingly none of the consultation and data-protection obligations that attach to the other records.
 
 What it produces is a declaration rather than an assessment: an account of what the work reached and what it could not. That is weaker than a measured result and stronger than an unqualified finding, and at this size it is what is available.
+
+The ten fields can be filled in the browser: [document builder](https://dturkina99.github.io/supervisory-capacity-assessment/), small function track. The builder fixes the status at *Declared*, locks the registered fields after the work and prints a registration check code. Full description in [`docs/small-function-track.md`](docs/small-function-track.md).
+
+## Declarations on record
+
+| Reference | Registered | Check code | Subject | Who |
+|---|---|---|---|---|
+| SFT-2026-01 | 2026-10-12 | `387a9f9d…` | Recode of the paper's dataset for the FAccT 2027 submission | The author, on the author's own study |
+
+Record file and both PDFs: [`declarations/SFT-2026-01/`](declarations/SFT-2026-01/). A use of the format by its author, not an adoption by another organisation. Declarations from other organisations are listed by role, or by name with permission. A declaration carries roles only and no performance data about individuals.
 
 ## What this is not
 
@@ -108,9 +122,15 @@ No criterion transfers between processes. What counts as adequate depends on the
 | `templates/03-oversight-stress-test.csv` | Do they catch errors that are deliberately planted? Results as a distribution, with conditions |
 | `templates/04-skill-preservation.csv` | Can they still do it without the system? Unassisted beside assisted |
 | `templates/05-production-evidence.csv` | What does the live process already show? Overturn rate, appeals received and upheld — observed, not assessed |
-| `templates/workpaper-supervisory-capacity.md` | Control-testing workpaper: control description, purpose limitation, design conclusion, exceptions |
+| `templates/workpaper-supervisory-capacity.md` | Control-testing workpaper: control description, purpose limitation, design conclusion, exceptions, improvements |
+| `docs/index.html` | Document builder: small function track, round register, the five records and the workpaper written in the browser; nothing stored; PDF, Word, Markdown and Excel export; registration check code. Served at [dturkina99.github.io/supervisory-capacity-assessment](https://dturkina99.github.io/supervisory-capacity-assessment/); pinned releases under `docs/vX.Y/` |
+| `docs/small-function-track.md` | The small function track: when it applies, the ten fields, the routes by which a problem could be missed |
+| `docs/what-a-standard-specifies.pdf` | Essay: a close reading of prEN 18229-3 and prEN 18228, with four enquiry comments reproduced |
+| `docs/where-to-start.png` | The two routing questions |
+| `docs/tests/check.js` | Checks for the builder after any change: routing, lock and check code, record save and reload, tamper detection, exports, zero network requests. Run `node docs/tests/check.js` from the repository root (needs Node 18+ and Playwright) |
 | `templates/README.md` | Field definitions and usage notes |
 | `dataset/README.md` | Pointer to the deposited coding data |
+| `declarations/` | Small function track declarations on record, one folder per reference: record file and PDFs |
 | `CITATION.cff` | Citation metadata; cite the paper rather than the repository |
 | `docs/capabilities-to-records.png` | The map above: capabilities, the records that test them, and the scorecard they land on |
 
@@ -120,13 +140,13 @@ Every record carries `round_id`. The instrument reads change between rounds rath
 
 The round register is completed before a round runs and not edited afterwards. It fixes the criterion and the date it was fixed, the triggers that invalidate it, the population and how it was selected, who builds the seeded set, who administers and who scores, and what follows a poor result. A result produced without it can be reported but not audited: nothing distinguishes a criterion set in advance from one chosen after the numbers were seen.
 
-The CSVs are the source of truth and render as tables in the browser. The record sheets in the workbook are generated from them; if they differ, the CSVs are correct. The scorecard tab is not generated and is filled by hand.
+The five records can also be entered as rows in the [document builder](https://dturkina99.github.io/supervisory-capacity-assessment/#records), which exports them as these CSVs and as one workbook with the same headers and computes nothing. The CSVs are the source of truth and render as tables in the browser. The record sheets in the workbook are generated from them; if they differ, the CSVs are correct. The scorecard tab is not generated and is filled by hand.
 
 These records describe state: what was assessed, under what conditions, and what the evidence supports. What follows from a result — remediation, restriction, coverage of the rest of the population, a revised criterion — is decided and recorded in the workpaper.
 
 **Start here.** Open `templates/supervisory-capacity-records.xlsx`. Its first tab lists what each of the others is for. Complete the round register first and the scorecard last. If you are doing one thing, complete the register and the competence matrix for one system and one reviewer group; the other records answer questions the first one raises.
 
-**Status.** These templates have not been run in production anywhere. Reports from anyone who tries them are welcome via issues.
+**Status.** These templates have not been run in production anywhere. One small function track declaration is on record, by the author on the author's own study (see *Declarations on record*). Reports from anyone who tries them are welcome via issues.
 
 A first round typically returns few determinations. Criteria are being stated for the first time, distributions have nothing to be compared against, and some assessments will have been run under conditions that do not support an inference to operation.
 
@@ -162,4 +182,4 @@ Corrections and disputes welcome via issues, including disputes with the coding 
 
 ## Licence
 
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), matching the deposited dataset. Share and adapt for any purpose including commercially, with attribution. See `LICENSE`.
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), matching the deposited dataset. Share and adapt for any purpose including commercially, with attribution. See `LICENSE`. The document builder in `docs/` is offered under the same licence, as is, without warranty.

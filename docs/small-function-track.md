@@ -28,6 +28,8 @@ What it produces is a declaration: an account of what the work reached and what 
 
 ## How to use it
 
+The ten fields can also be filled in the browser, with Word, Markdown and Excel export and a registration check code: open the [document builder](https://dturkina99.github.io/supervisory-capacity-assessment/) and choose the small function track. Nothing typed there leaves the page.
+
 1. Before the work starts, open the **Small function track** tab of `supervisory-capacity-records.xlsx` and delete the illustrative values in column B.
 2. Fill the first eight fields. They are answerable before any analysis begins, and that is the point: each one records a condition you can still act on.
 3. Do the work.
@@ -52,6 +54,7 @@ Held on the **Small function track** tab of `supervisory-capacity-records.xlsx`.
 | **Verification of that work** | What was checked, by what method, and what could not be checked at the available scale | Spot-checking attempted; two samples traced to source; deep verification not achievable at this volume |
 | **What would have prevented detection** | Routes by which a problem could have been missed. See the table below | Ten routes, each stated by the investigators in their own limitations section |
 | **Independence available** | Structural independence and operational separation, recorded separately | Structural: unpaid, separate organisations, right to publish. Operational: none — the same three people build, run and read. Tooling: supplied by the subject |
+| **Registered condition to decline** (8a) | The condition under which the function would decline to conclude, fixed before the work | Not stated |
 | **Status** | Declared, and the basis on which | Declared. Limits published in full, including delegation and non-robustness to deception by the analysis tool |
 | **What it does not support** | The sentence a reader would otherwise supply for themselves, wrongly | Any claim that behaviour of this kind would be detected, or characterised to the same depth, in a next engagement under the same conditions |
 

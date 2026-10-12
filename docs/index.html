@@ -1,0 +1,839 @@
+<!doctype html>
+<!--
+  Supervisory capacity - document builder, version 0.1 (preview)
+  (c) 2026 Diana Turkina. Part of the supervisory-capacity-assessment repository.
+  Licensed CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+  Provided as is, without warranty. Documents produced with it are the user's own.
+  Source: https://github.com/dturkina99/supervisory-capacity-assessment
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Supervisory capacity · document builder</title>
+<meta name="description" content="Write the three documents of the supervisory-capacity-assessment repository in the browser: small function track, round register, workpaper. Nothing is sent or stored.">
+<style>
+  :root{--ink:#111;--mute:#555;--line:#bbb;--bg:#fff;--panel:#fafafa;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;}
+  header{border-bottom:2px solid var(--ink);padding:12px 24px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
+  header h1{margin:0;font-size:20px;}
+  header p{margin:3px 0 0 0;color:var(--mute);font-size:13.5px;max-width:900px;}
+  header .nav{font-size:13.5px;white-space:nowrap;}
+  body:not(.building) header .nav a.back, body:not(.building) header .nav .sep{display:none;}
+  @media (max-width:760px){header .nav .full{display:none;}}
+  header .nav a{color:var(--ink);}
+  /* start screen */
+  .start{max-width:860px;margin:0 auto;padding:36px 24px;}
+  .start h1.lead{font-size:30px;margin:0 0 8px 0;line-height:1.2;}
+  .start p.leadsub{font-size:16px;color:#333;margin:0 0 28px 0;max-width:760px;}
+  .start h2{font-size:22px;margin:0 0 6px 0;}
+  .route .rt{display:block;font-weight:bold;margin-bottom:8px;}
+  .q h3.small{font-size:15px;}
+  .q.inner .opts button{padding:6px 12px;font-size:14px;}
+  .q.inner .hint{font-weight:normal;color:var(--ink);}
+  .pill{display:inline-block;background:#f3ead8;border:1px solid #c9b48a;color:#5a4a1f;padding:2px 10px;font-weight:bold;}
+  .get{margin:10px 0 12px 0;}
+  .steps{display:flex;align-items:stretch;gap:6px;margin:22px 0 22px 0;flex-wrap:wrap;}
+  .steps .step{flex:1;min-width:140px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;font:inherit;padding:10px 12px;border:2px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;text-align:left;text-decoration:none;}
+  .steps .step .n{font-size:11px;color:var(--mute);letter-spacing:1px;}
+  .steps .step .t{font-size:16px;font-weight:bold;}
+  .steps .step small{font-size:11.5px;color:var(--mute);line-height:1.3;}
+  .steps a.out{border-color:var(--line);border-style:dashed;}
+  .steps .arr{align-self:center;font-size:20px;color:var(--mute);}
+  .q.inner{border:1px solid var(--line);padding:8px 12px;margin:8px 0 0 0;background:#fff;}
+  .q.inner h3.small{font-size:14px;margin:0 0 6px 0;}
+  .q.inner .opts button{padding:4px 10px;font-size:13px;border-width:1.5px;}
+  .q.inner .hint{margin:6px 0 0 0;font-size:13px;}
+  .route p.cond{font-size:13px;color:var(--mute);margin:0 0 8px 0;}
+  @media (max-width:760px){.steps{flex-direction:column;} .steps .arr{display:none;}}
+  .alldocs{margin-top:28px;font-size:14px;}
+  .alldocs .track{color:var(--mute);font-size:12px;margin-right:4px;}
+  .alldocs .sep{margin:0 8px;color:var(--line);}
+  .alldocs a{color:var(--ink);}
+  @media (max-width:760px){.steps{flex-direction:column;align-items:stretch;} .steps .arr{display:none;}}
+  .start .links{margin-top:26px;font-size:14px;}
+  .start .links a{color:var(--ink);}
+  .start .privacy{font-size:13px;color:var(--mute);margin-top:10px;}
+  .start .privacy a{color:var(--mute);}
+  .start p{color:var(--mute);margin:0 0 22px 0;}
+  .q{border:2px solid var(--ink);padding:16px 20px;margin:0 0 14px 0;}
+  .q h3{margin:0 0 10px 0;font-size:17px;}
+  .q .hint{margin:-6px 0 10px 0;}
+  .q.inner{border-width:1px;margin:10px 0 12px 0;background:#fff;}
+  .q.inner .hint{margin:8px 0 0 0;}
+  .q .opts{display:flex;gap:10px;flex-wrap:wrap;}
+  .q button,.cards button{font:inherit;padding:9px 14px;border:2px solid var(--ink);background:#fff;cursor:pointer;}
+  .q button.on{background:var(--ink);color:#fff;}
+  .route{border:2px dashed var(--ink);padding:14px 20px;margin:18px 0;display:none;}
+  .route.show{display:block;}
+  .route > b{display:block;margin-bottom:6px;}
+  .route p{margin:6px 0 10px 0;}
+  .route button{font:inherit;padding:8px 12px;border:2px solid var(--ink);background:#fff;cursor:pointer;margin:6px 6px 0 0;}
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px;}
+  @media (max-width:1100px){.cards{grid-template-columns:repeat(2,1fr);}}
+  .route a.btnlink{display:inline-block;font:inherit;padding:8px 12px;border:2px solid var(--ink);background:#fff;color:var(--ink);text-decoration:none;margin:6px 6px 0 0;}
+  body.doc-rec .actions button.docx-only{display:none;}
+  .rec-rows .row{border:1px solid var(--line);padding:8px 10px;margin:6px 0;background:#fff;}
+  .rec-rows .row .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px 10px;}
+  .rec-rows .row .grid label{margin:0 0 2px 0;}
+  .rec-rows .rowhead{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--mute);margin-bottom:4px;}
+  .doc table.rec{font-size:11px;}
+  .doc table.rec td,.doc table.rec th{padding:3px 5px;}
+  .doc .recwrap{overflow:auto;}
+  .card{border:1px solid var(--line);padding:14px 16px;background:var(--panel);display:flex;flex-direction:column;}
+  .card p{flex:1;}
+  .card button{align-self:flex-start;}
+  .card h4{margin:0 0 6px 0;font-size:15px;}
+  .card p{font-size:13.5px;color:var(--mute);margin:0 0 10px 0;}
+  @media (max-width:760px){.cards{grid-template-columns:1fr;}}
+  /* builder */
+  .layout{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+  .form{padding:20px 24px;border-right:2px solid var(--ink);background:var(--panel);}
+  .preview{padding:20px 24px;position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto;}
+  .showprev{display:none;}
+  @media (max-width:1200px){
+    .layout{grid-template-columns:1fr;}
+    .form{border-right:none;border-bottom:2px solid var(--ink);}
+    .preview{position:static;max-height:none;}
+    .preview.collapsed .doc{display:none;}
+    .showprev{display:inline-block;}
+  }
+  .phase{display:flex;margin:0 0 16px 0;border:2px solid var(--ink);width:max-content;}
+  .phase button{border:none;background:#fff;padding:8px 14px;font:inherit;cursor:pointer;}
+  .phase button.on{background:var(--ink);color:#fff;}
+  fieldset{border:1px solid var(--line);padding:12px 14px;margin:0 0 14px 0;background:#fff;}
+  legend{font-weight:bold;padding:0 6px;}
+  legend .key{display:inline-block;border:2px solid var(--ink);padding:0 6px;margin-left:6px;font-size:11px;letter-spacing:1px;vertical-align:middle;}
+  .hint{color:var(--mute);font-size:13px;margin:0 0 8px 0;}
+  label{display:block;font-size:13px;color:var(--mute);margin:8px 0 3px 0;}
+  input[type=text],textarea,select{width:100%;font:inherit;font-size:16px;padding:7px 8px;border:1px solid var(--line);background:#fff;}
+  .chk{display:inline-block;margin-left:8px;font-size:13px;color:var(--mute);}
+  .chk b{color:var(--ink);}
+  @media (max-width:560px){table.grid.routes thead{display:none;} table.grid.routes tr{display:block;border-bottom:1px solid var(--line);padding:6px 0;} table.grid.routes td{display:block;border:none;padding:3px 0;}}
+  .progress{font-size:13px;color:var(--mute);margin:0 0 10px 0;}
+  .progress .bar{height:4px;background:#e4e4e4;margin-top:4px;}
+  .progress .bar i{display:block;height:4px;background:var(--ink);}
+  legend .amendbtn{font:inherit;font-size:12px;padding:1px 8px;border:1px solid var(--ink);background:#fff;cursor:pointer;margin-left:8px;display:none;vertical-align:middle;}
+  body.phase-after legend .amendbtn{display:inline-block;}
+  .consult .big{width:22px;height:22px;margin-top:2px;flex:none;}
+  .consult b{display:block;font-size:15px;}
+  .consult .hint{margin:2px 0 0 0;}
+  .empty{color:var(--mute);font-style:italic;font-family:Georgia,serif;}
+  .printhead{display:none;}
+  .doc .titlerow{display:flex;justify-content:space-between;align-items:baseline;gap:12px;} .doc .titlerow h2{margin:0;} .doc .status{font-family:Georgia,serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--ink);padding:3px 8px;white-space:nowrap;}
+  .doc table.idblock,.doc table.kv{font-size:12.5px;margin:8px 0 10px 0;} .doc table.idblock td,.doc table.kv td{border:0;padding:2px 10px 2px 0;vertical-align:top;} .doc table.idblock td:first-child,.doc table.kv td:first-child{color:#555;width:150px;white-space:nowrap;} .doc table.idblock{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);} .doc table.idblock td{padding:3px 10px 3px 0;} .doc table.idblock .hash{font-size:11px;word-break:break-all;}
+  .doc table.idblock+p.stand{border-top:0;margin-top:-6px;}
+  .doc table.pw{border-collapse:collapse;width:100%;margin:0;font-size:inherit;} .doc table.pw>thead>tr>td,.doc table.pw>tbody>tr>td{border:0;padding:0;}
+  @media print{.doc table.keep,.doc table.kv,.doc table.idblock{page-break-inside:avoid;break-inside:avoid;} .doc tr{page-break-inside:avoid;break-inside:avoid;} .doc h3{page-break-after:avoid;break-after:avoid;} .doc .amd,.doc .warn{page-break-inside:avoid;break-inside:avoid;} .printhead{display:block;font-family:Georgia,serif;font-size:9pt;color:#555;border-bottom:1px solid #999;padding-bottom:2pt;margin-bottom:12pt;} .doc table.pw>thead{display:table-header-group;} .doc table.pw>tbody>tr>td{padding-top:0;}}
+  textarea{min-height:60px;resize:vertical;}
+  input:disabled,textarea:disabled,select:disabled{background:#f1f1f1;color:#333;}
+  .check{display:flex;gap:8px;align-items:flex-start;font-size:14px;margin:6px 0;}
+  .check input{margin-top:4px;}
+  .consult{border:2px solid var(--ink);padding:10px 12px;margin:0 0 14px 0;background:#fff;font-size:14px;}
+  .lockmsg{font-size:13px;border:1px solid var(--ink);padding:8px 10px;margin:0 0 14px 0;background:#fff;}
+  table.grid{width:100%;border-collapse:collapse;font-size:13px;}
+  table.grid th,table.grid td{border-bottom:1px solid var(--line);padding:6px 4px;vertical-align:top;text-align:left;}
+  table.grid select,table.grid input[type=text]{font-size:13px;padding:4px 6px;}
+  table.grid select.unset{border-color:var(--ink);border-style:dashed;}
+  .addrow{font:inherit;font-size:13px;padding:4px 10px;border:1px solid var(--ink);background:#fff;cursor:pointer;margin-top:6px;}
+  .after,.amend{display:none;}
+  body.phase-after .after{display:block;}
+  body.phase-after .amend{display:block;margin-top:8px;border-top:1px dashed var(--line);padding-top:8px;}
+  .amend button{font:inherit;font-size:13px;padding:4px 10px;border:1px solid var(--ink);background:#fff;cursor:pointer;}
+  .amend .box{display:none;margin-top:6px;}
+  .amend.open .box{display:block;}
+  body.phase-after .amend{border-top:none;padding-top:0;margin-top:0;}
+  .fixed{display:inline-block;border:2px solid var(--ink);padding:2px 8px;font-weight:bold;letter-spacing:1px;font-size:13px;}
+  /* toolbar */
+  .actions{margin:0 0 12px 0;border:1px solid var(--line);background:var(--panel);padding:10px 12px;}
+  .actions .group{display:grid;grid-template-columns:150px 1fr;gap:6px 10px;align-items:center;margin:0 0 8px 0;}
+  .actions .btns{display:flex;flex-wrap:wrap;gap:6px;}
+  .actions .glabel{font-size:13px;color:var(--mute);}
+  .actions button{font:inherit;font-size:14px;padding:6px 10px;border:1.5px solid var(--ink);background:#fff;cursor:pointer;white-space:nowrap;}
+  .actions button.primary{background:var(--ink);color:#fff;}
+  .actions button.quiet{border-color:var(--line);color:var(--mute);}
+  .actions input[type=file]{display:none;}
+  .actions .ghint{font-size:13px;color:var(--mute);margin:4px 0 0 0;}
+  @media (max-width:560px){.actions .group{grid-template-columns:1fr;}}
+  .note{font-size:13px;color:var(--mute);margin:0 0 14px 0;}
+  /* document */
+  .doc{font-family:Georgia,"Times New Roman",serif;max-width:720px;}
+  .doc h2{font-size:20px;margin:0 0 2px 0;font-weight:normal;}
+  .doc .meta{color:var(--mute);font-size:13px;margin:0 0 6px 0;}
+  .doc .stand{font-size:13px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:6px 0;margin:0 0 12px 0;}
+  .doc .hash{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;word-break:break-all;}
+  .doc button.copy{font:inherit;font-family:Helvetica,Arial,sans-serif;font-size:11px;padding:1px 7px;border:1px solid var(--ink);background:#fff;cursor:pointer;vertical-align:middle;}
+  @media print{.doc button.copy{display:none;}}
+  .doc h3{font-size:14px;margin:16px 0 4px 0;}
+  .doc p{margin:0 0 6px 0;}
+  .doc .ns{color:var(--mute);font-style:italic;}
+  .doc .warn{border:1px solid var(--ink);padding:4px 8px;font-size:13px;}
+  .doc .amd{border-left:3px solid var(--ink);padding-left:8px;margin:4px 0 8px 0;}
+  .doc table{border-collapse:collapse;width:100%;font-size:13px;margin:4px 0 8px 0;}
+  .doc td,.doc th{border:1px solid var(--line);padding:5px 7px;vertical-align:top;text-align:left;}
+  .doc .foot{font-size:12px;color:var(--mute);border-top:1px solid var(--ink);margin-top:18px;padding-top:8px;}
+  @media print{ header,.form,.actions,.note,.showprev,.start{display:none!important;} .layout{display:block;} .preview{padding:0;position:static;max-height:none;overflow:visible;} .preview.collapsed .doc{display:block;} .doc{max-width:none;} }
+  #builder{display:none;} body.building #builder{display:block;} body.building #start{display:none;}
+</style>
+</head>
+<body class="phase-before">
+<header>
+  <div>
+    <h1 id="title">Supervisory capacity · document builder</h1>
+    <p>Nothing you type leaves this page or is stored. Save a record file to continue later.</p>
+  </div>
+  <div class="nav"><a href="#start" class="back" onclick="goStart();return false;">&larr; Back to start</a><span class="full"><span class="sep"> · </span><a href="#small-function-track" onclick="openDoc('sft');return false;">Small function track</a> · <a href="#round-register" onclick="openDoc('reg');return false;">Round register</a> · <a href="#records" onclick="openDoc('rec');return false;">Records</a> · <a href="#workpaper" onclick="openDoc('wp');return false;">Workpaper</a></span></div>
+</header>
+
+<section id="start" class="start">
+  <h1 class="lead">Evidence that your human oversight control works.</h1>
+  <p class="leadsub">You are asserting a control you cannot currently evidence. Nothing breaks if you leave it; the first time anyone asks, the answer is that nobody has looked. Four documents, written in the browser, in audit format.</p>
+  <h2>Where to start</h2>
+  <p>One question routes you. Not sure? <a href="#small-function-track" onclick="openDoc('sft');setTimeout(loadExample,150);return false;">Open the small function track and load the worked example</a>; it takes two minutes.</p>
+  <div class="q"><h3>1 · Could someone else tell whether the reviewer got it wrong?</h3>
+    <p class="hint">An answer independent of the reviewer · asked per decision type, not per organisation.</p>
+    <div class="opts"><button id="q1n" onclick="q(1,'n')">No, it is a judgment with no key</button><button id="q1y" onclick="q(1,'y')">Yes, there is an answer to check against</button></div></div>
+  <div class="route" id="routeSft"><span class="rt">Declaration only · small function track</span>
+    <p>Typically three to six people. You fill the ten fields, nothing else. No performance data about named people, so no consultation arises. About an hour, once per engagement.</p>
+    <p class="get">What you get: <span class="pill">Declared</span></p>
+    <button onclick="openDoc('sft')">Open the small function track</button></div>
+  <div class="route" id="routeFull"><span class="rt">Full round · a reviewer population</span>
+    <div class="q inner"><h3 class="small">2 · Can one person build the test, another run it, a third score it?</h3>
+      <div class="opts"><button id="q2y" onclick="q(2,'y')">Yes</button><button id="q2n" onclick="q(2,'n')">No</button></div>
+      <p class="hint" id="q2note"></p></div>
+    <div class="steps">
+      <button class="step" onclick="openDoc('reg')"><span class="n">1</span><span class="t">Register</span><small>here, before the round</small></button><span class="arr">&rarr;</span>
+      <button class="step" onclick="openDoc('rec')"><span class="n">2</span><span class="t">Records</span><small>here, or in the spreadsheet</small></button><span class="arr">&rarr;</span>
+      <a class="step out" href="https://github.com/dturkina99/supervisory-capacity-assessment/raw/main/templates/supervisory-capacity-records.xlsx"><span class="n">3</span><span class="t">Scorecard &nearr;</span><small>in the spreadsheet, by hand · download</small></a><span class="arr">&rarr;</span>
+      <button class="step" onclick="openDoc('wp')"><span class="n">4</span><span class="t">Workpaper</span><small>here, after the round</small></button>
+    </div>
+    <p class="cond">A tested round creates per-individual data, and the seeded-error record involves deception, so consultation comes first.</p>
+    <p class="get">What you get: <span class="pill">Supported · recorded · qualified</span> <span class="hint" style="display:inline">not determined where a round could not support a reading</span></p></div>
+  <p class="alldocs">All documents: <span class="track">Declaration only</span> <a href="#small-function-track" onclick="openDoc('sft');return false;">Small function track</a> <span class="sep">|</span> <span class="track">Full round</span> <a href="#round-register" onclick="openDoc('reg');return false;">Round register</a> · <a href="#records" onclick="openDoc('rec');return false;">Records</a> · <a href="#workpaper" onclick="openDoc('wp');return false;">Workpaper</a></p>
+  <p class="links">Read more: <a href="https://doi.org/10.5281/zenodo.23311590">the essay on the European draft standard</a> · <a href="https://doi.org/10.2139/ssrn.7248205">the paper</a> · <a href="https://github.com/dturkina99/supervisory-capacity-assessment">the repository with the templates</a></p>
+  <p class="privacy">This page loads one file and makes no further requests. Nothing you type is stored or sent, and you can confirm that in your browser's network tab. GitHub serves the page and keeps its own server logs under <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>. The documents produced are the user's own records and conclusions. Written in a personal capacity; format provided for information, not advice. Builder &copy; 2026 Diana Turkina, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, as is, without warranty.</p>
+</section>
+
+<section id="builder">
+<div class="layout">
+<section class="form" id="form"></section>
+<section class="preview" id="preview">
+  <div class="actions">
+    <div class="group"><span class="glabel">The document</span><div class="btns">
+      <button class="primary" onclick="if(nameGate()){printTitle(); window.print();}">Print / PDF</button>
+      <button class="docx-only" onclick="if(nameGate()) downloadDoc()">Word (.doc)</button>
+      <button class="docx-only" onclick="if(nameGate()) downloadMd()">Markdown (.md)</button>
+      <button onclick="if(nameGate()) downloadXlsx()">Excel (.xlsx)</button>
+    </div></div>
+    <div class="group"><span class="glabel">The record file (.json)</span><div class="btns">
+      <button onclick="if(nameGate()) saveJson()">Save record</button>
+      <button type="button" onclick="document.getElementById('loadfile').click()">Open saved record</button>
+      <input type="file" id="loadfile" accept="application/json" onchange="loadJson(event)">
+      <input type="file" id="verifyfile" accept="application/json" onchange="verifyLoad(event)">
+      <input type="file" id="csvfile" accept=".csv,text/csv" onchange="csvLoad(event)">
+      <button class="quiet" onclick="if(confirm('Clear all fields?')){clearAll()}">Clear all</button>
+      <button class="quiet showprev" onclick="togglePreview()" id="btnPrev">Hide document</button>
+    </div></div>
+    <p class="ghint" id="loadmsg" style="display:none"></p>
+    <p class="ghint">The record file is a plain-text .json file saved to your own computer, holding every field, the registered snapshot and its check code. Open it here to continue later. Keep it with the PDF: it is the machine-readable copy, and anyone can recompute the check code from it. Move it out of your Downloads folder into the engagement's own folder; it contains everything on the page. Nothing is kept in the browser.</p>
+  </div>
+  <p class="note">The document below updates as you type. It uses the wording of the templates in the repository.</p>
+  <div class="doc" id="doc"></div>
+</section>
+</div>
+</section>
+
+<script>
+/* ---------- shared data ---------- */
+const ROUTES = [
+  ["Communication outside the captured record","Subjects may use channels the collection did not cover"],
+  ["Incompleteness of the captured record","Collection is rarely total, and the shortfall is rarely known"],
+  ["Records altered by the subjects","Where subjects control the record, the record is evidence about them and produced by them"],
+  ["Deletion after the fact","Attempts may succeed without leaving a trace"],
+  ["Error by the analysis tool","Delegated analysis carries an error rate the team cannot fully audit"],
+  ["Bias of the analysis tool","A tool that summarises may summarise sympathetically"],
+  ["Deception by the analysis tool","Where the tool is related to the subject, its output is not neutral evidence"],
+  ["No access to the primary subject","The thing under investigation may not be available for direct examination"],
+  ["Scope set by the subject","What is out of scope cannot be found"],
+  ["Editorial control by the subject","Redaction and feedback shape what is published"]
+];
+const DESIGN = [
+  ["Competence specified","Required capabilities stated as observable performance, per system scope","Record 01, competence matrix: required_skill, required_level"],
+  ["Criterion set in advance","Criterion and the date it was fixed recorded before the round","Register; record 01, competence matrix: criterion, criterion_set_date"],
+  ["Independence of roles","Set builder, administrator and scorer separated; separations absent are named","Register; record 01, competence matrix: assessor_independence"],
+  ["Assessment at intake","Method stated; conditions recorded","Record 01, competence matrix: assessment_method, conditions"],
+  ["Reassessment","Interval stated; triggers stated (system change, scope change, new assignee)","Register; record 01, competence matrix: next_due_date"],
+  ["Conditions of work recorded","Hours, continuous stretches, breaks, concurrent load","Record 02, time on task"],
+  ["Consequence of a failed assessment","Stated before the result: reassignment, remediation, or limitation on reliance","Register; record 01, competence matrix: remediation, interim_restriction"],
+  ["Authority to act","Reviewers can halt the process they oversee, on a stated authority","Record 01, competence matrix: authority_to_halt"],
+  ["Unassisted capability measured","Performance recorded with the system and without it, at a stated interval","Record 04, skill preservation"]
+];
+const STATUSES=["supported","recorded","qualified","not determined"];
+const CONSULT = "Records 01 to 04 create performance data about identifiable people. Consultation with the persons assessed, and with any staff representation, comes first. Roles, not names, on this document.";
+
+/* ---------- document definitions ---------- */
+const T=(id,label,ph,opt={})=>Object.assign({id,label,type:'text',placeholder:ph||''},opt);
+const A=(id,label,ph,opt={})=>Object.assign({id,label,type:'textarea',placeholder:ph||''},opt);
+const S=(id,label,options,opt={})=>Object.assign({id,label,type:'select',options},opt);
+
+const DOCS = {
+ sft: {
+  title:"Small function track", phases:['before','after'], consult:false,
+  intro:"Ten fields, fixed before the work and published with the finding, for an oversight function with no answer to check its reviewers against. Fill the header and fields 1 to 8a before any analysis begins. A field with no answer is printed as not stated; that is a finding about the engagement, not a gap in the form.",
+  sections:[
+   {key:'h',legend:'Header',hint:'Roles, not names. The technical file carries the names.',inputs:[T('h_ref','Document reference','e.g. SFT-2026-03'),T('h_prep','Prepared by (role)','e.g. lead investigator'),T('h_reports','Function reports to (role)','e.g. head of assurance'),T('h_regdate','Registration date','date the first eight fields were fixed')]},
+   {key:'1',legend:'1 · Engagement, dates',amend:true,hint:'What is being investigated, when scope was agreed, when work starts, who set the period under review.',inputs:[T('f_subject','What is being investigated','e.g. Independent review of an incident involving an automated agent'),T('f_scopedate','Scope agreed on','date'),T('f_start','Work starts','date, and days or sessions planned'),T('f_periodby','Period under review set by','the function / the subject / agreed jointly')]},
+   {key:'2',legend:'2 · Function',amend:true,hint:'How many investigators, from which organisations, paid by the subject or not. Counts and organisations, not names.',inputs:[T('f_function','','e.g. Three investigators from two organisations, unpaid by the subject')]},
+   {key:'3',legend:'3 · In scope / out of scope',amend:true,hint:'Both lists in full, so scope cannot be inferred from omission.',inputs:[A('f_in','In scope','e.g. Agent activity in the period under review; reasoning and collaboration between agents'),A('f_out','Out of scope','e.g. Effectiveness of safeguards; the subject\'s own remediation; earlier periods')]},
+   {key:'4',legend:'4 · Evidence against time',amend:true,hint:'Volume and time available, side by side. No ratio is computed; the reader will.',inputs:[T('f_volume','Volume of evidence','e.g. ~1,300 transcripts; 1.2 million cache entries'),T('f_time','Time available','e.g. six days on premises'),T('f_budget','Budget or credits, if any','e.g. roughly $400,000 in analysis credits, supplied by the subject')]},
+   {key:'5',legend:'5 · Portion delegated, to what',amend:true,hint:'Before the work this can be a count, which is the point of registering it.',inputs:[T('f_readbyperson','Items to be read end to end by a person','count or not stated'),T('f_readbytool','Items to be read by a tool only','count or not stated'),T('f_spotchecks','Spot-checks planned, against items sampled','e.g. 40 items, random'),T('f_tools','Tools used','e.g. a language model used to summarise transcripts; a log search tool'),T('f_toolrel','Relation of the tools to the subject','e.g. a model that participated in the incident, on credits supplied by the subject')]},
+   {key:'6',legend:'6 · Verification of that work',amend:true,hint:'What will be checked, by what method, and what cannot be checked at the available scale.',inputs:[A('f_verify','','e.g. Spot-checks of tool output against source transcripts, 40 items sampled at random; deep verification not achievable at this volume')]},
+   {key:'7',legend:'7 · What would have prevented detection',amend:true,hint:'Work through all ten routes. Each row needs an answer. Rows left unanswered print as not considered, and the document counts them.',table:'routes'},
+   {key:'8',legend:'8 · Independence available',amend:true,hint:'Structural independence and operational separation, recorded separately. The second is not achievable by three people, and recording it as absent is not a criticism.',inputs:[T('f_struct','Structural (paid by whom, separate organisation, right to publish)','e.g. Unpaid by the subject; two organisations; right to publish'),T('f_oper','Operational (who builds, runs and reads; any separation)','e.g. None: the same three people build, run and read'),T('f_tooling','Tooling (who supplies the analysis tools)','e.g. Supplied by the subject on its own credits')]},
+   {key:'8a',legend:'8a · Registered condition to decline',amend:true,hint:'The condition under which the function would decline to conclude. Naming it in advance is cheap; deciding it afterwards is the failure mode.',inputs:[A('f_decline','','e.g. If fewer than one in ten delegated items can be traced to source, the function reports no finding on concealment')]},
+   {key:'9',legend:'9 · Status',after:true,hint:'On this track the status is always DECLARED. State the basis.',inputs:[A('f_basis','Basis','e.g. Limits published in full, including delegation and non-robustness to deception by the analysis tool'),T('f_done','Completed on','date')]},
+   {key:'10',legend:'10 · What it does not support',after:true,hint:'The sentence a reader would otherwise supply for themselves, wrongly.',inputs:[T('f_codesent','Registration check code sent to (role)','e.g. someone outside the function'),T('f_codesentdate','Sent on','date'),A('f_notsupport','','e.g. Any claim that behaviour of this kind would be caught next time under the same conditions')]}
+  ]
+ },
+ reg: {
+  title:"Round register", phases:['before','after'], consult:true,
+  intro:"Completed before the round runs, and not edited afterwards. The field this register exists for is the criterion and when it was fixed. Fixed after the round, the result is a number rather than a test.",
+  sections:[
+   {key:'h',legend:'Header',hint:'Roles, not names.',inputs:[T('h_round','Round id','e.g. 2026-R1, carried by every record'),T('h_prep','Prepared by (role)','e.g. second line, model risk'),T('h_reports','Function reports to (role)','e.g. head of assurance'),T('h_prev','Previous round check code, if any','paste from the previous round record, or check against its record file'),{type:'verify',target:'h_prev'}]},
+   {key:'1',legend:'1 · Dates',amend:true,hint:'If registered and run are the same day, the entry establishes nothing.',inputs:[T('f_regdate','Date registered','date'),T('f_rundate','Date the round runs','date or window')]},
+   {key:'2',legend:'2 · Population, and the rule',amend:true,hint:'State the rule, not the outcome. Availability is not a rule: it tracks load.',inputs:[A('f_pop','','e.g. All 12 analysts rostered to the decline queue in week 30')]},
+   {key:'3',legend:'3 · Criterion, and when fixed',amend:true,keyfield:true,hint:'The field this register exists for. State the criterion as a number, and the date and role that fixed it.',inputs:[T('f_crit','Criterion','e.g. Detects 12 of 15 unsupported declines'),T('f_critdate','Fixed on','date'),T('f_critby','Fixed by (role)','e.g. second line')]},
+   {key:'4',legend:'4 · Triggers that invalidate it',amend:true,hint:'A determination made against one version of the system does not survive a change to it.',inputs:[A('f_triggers','','e.g. Model version change; scope extended to a new product; a new analyst joins the queue')]},
+   {key:'5',legend:'5 · Roles',amend:true,hint:'Set builder cannot be assessed on the items. The scorer should be independent of the queue.',inputs:[T('f_builder','Set builder (role)','e.g. model risk'),T('f_admin','Administrator (role)','e.g. QA'),T('f_scorer','Scorer (role)','e.g. second line')]},
+   {key:'6',legend:'6 · Separations absent',amend:true,hint:'Name any role held by two hats, or by someone in the assessed population. Where absent, the result is recorded, not supported.',inputs:[A('f_sepabsent','','None, or which')]},
+   {key:'7',legend:'7 · Conditions planned',amend:true,hint:'Varied or recorded, never scored against a person.',inputs:[A('f_cond','','e.g. Embedded in the live queue, five days; reviewers told a round would run in Q3; presented confidence varied')]},
+   {key:'8',legend:'8 · Consequence of a poor result',amend:true,hint:'Deciding afterwards is the failure mode.',inputs:[A('f_conseq','','e.g. Remediation and interim restriction on unsupervised review')]},
+   {key:'9',legend:'9 · Publication',amend:true,hint:'Three clean rounds in a row is a flag on the seeding, not a reassurance.',inputs:[T('f_pub','','e.g. Recorded in the round sequence whichever way it goes')]},
+   {key:'10',legend:'10 · Result',after:true,hint:'The result against the criterion, as a number. Then the status, with one line on the basis.',inputs:[T('f_result','Result against the criterion','e.g. 11 of 15 detected'),T('f_codesent','Registration check code sent to (role)','e.g. head of model risk, outside the function'),T('f_codesentdate','Sent on','date'),S('f_status','Status',STATUSES),A('f_statusbasis','Basis for the status','e.g. Below the criterion by one; no separation absent'),T('f_trigfired','Did any registered trigger fire during the round?','none / which, and when'),T('f_done','Round completed on','date')]}
+  ]
+ },
+ rec: { title:"Records of the round", phases:['single'], consult:true, custom:true, intro:"The five records of a round, entered as rows and exported as the template CSVs or one workbook with the same headers. This page computes nothing: no rates, no distributions, no verdicts. The scorecard that reads these records is a tab in the spreadsheet, filled by hand.", sections:[] },
+ wp: {
+  title:"Workpaper · supervisory capacity", phases:['single'], consult:true,
+  intro:"Control testing workpaper, assembled from conclusions already reached in the spreadsheet. It carries the control description, the purpose limitation, the design conclusion and the exceptions. It does not restate scope, results or population: those are on the scorecard for the round. This page computes no results.",
+  sections:[
+   {key:'h',legend:'Scope',hint:'Roles, not names.',inputs:[T('h_ctrl','Control reference','e.g. HO-01'),T('h_system','System under review','e.g. Decline queue model, v3'),T('h_task','Oversight task the persons perform','e.g. review of declines above threshold before they take effect'),T('h_interval','Reassessment interval as stated','e.g. six months, and on any registered trigger'),T('h_period','Period','e.g. Q3 2026'),T('h_prep','Prepared by (role)','e.g. second line, model risk'),T('h_prepdate','Prepared on','date'),T('h_rev','Reviewed by (role)','e.g. head of model risk'),T('h_revdate','Reviewed on','date'),T('h_file','Technical file reference this attaches to','e.g. TF-DQ-v3, section 9')]},
+   {key:'docs',legend:'Documents for this function',hint:'Reference and filing location of each document that exists for this oversight function. Enter not applicable where one does not.',inputs:[T('f_doc_reg_ref','Round register: reference','e.g. 2026-R1'),T('f_doc_reg_loc','Round register: filed at','e.g. technical file, section 9'),T('f_doc_sft_ref','Small function track declaration: reference','or not applicable'),T('f_doc_sft_loc','Small function track declaration: filed at','or leave blank if not applicable'),T('f_doc_score_ref','Scorecard for the round: reference','e.g. 2026-R1 scorecard'),T('f_doc_score_loc','Scorecard: filed at','e.g. technical file, section 9'),T('f_doc_wp_ref','This workpaper: reference','e.g. HO-01'),T('f_doc_wp_loc','This workpaper: filed at','e.g. technical file, section 9')]},
+   {key:'pl',legend:'3 · Purpose limitation',hint:'State which applies.',inputs:[S('f_purpose','Use of results',['control-testing purposes only','also individual performance management, separately agreed and disclosed in advance'])]},
+   {key:'r',legend:'Rounds this workpaper rests on',hint:'One row per round, with the check code pasted from the round record, or checked against its record file. This is where the chain is visible.',table:'rounds'},
+   {key:'d',legend:'4 · Control design',hint:'For each element: where it is evidenced, whether the design is adequate, and one line of basis. Element and design text are the template\'s and are locked.',table:'design'},
+   {key:'res',legend:'5 · Results',hint:'Summarise only what bears on the conclusion.',inputs:[T('f_scoreround','Scorecard round id','e.g. 2026-R1'),A('f_results','Summary','Only what bears on the conclusion, e.g. 11 of 15 detected against a criterion of 12; distribution on the scorecard')]},
+   {key:'ex',legend:'6 · Exceptions and remediation',hint:'Owner is a role.',table:'exceptions'},
+   {key:'c',legend:'7 · Conclusion',hint:'A design conclusion can be reached on the register and the design table alone. Operating effectiveness requires a round with a criterion fixed in advance and stated separations; where either is missing, the correct entry is Not tested.',inputs:[S('f_design','Design',['Effective','Effective with improvements (requires an entry in section 8)','Deficient']),A('f_designbasis','Basis','e.g. All elements evidenced except unassisted capability'),S('f_opeff','Operating effectiveness',['Effective','Effective with improvements (requires an entry in section 8)','Deficient','Not tested']),A('f_opbasis','Basis','e.g. Round 2026-R1 below the criterion by one; remediation applied as registered'),A('f_notcovered','Capabilities not covered by this test','e.g. Independent judgment on novel questions; recorded as not assessed'),S('f_review','Review outcome',['agreed','agreed with comments','not agreed']),A('f_reviewnote','Reviewer\'s comment')]},
+   {key:'imp',legend:'8 · Improvements',hint:'Required where either conclusion is Effective with improvements. Each improvement names the design element it bears on. Owner is a role. This section is an addition to the template.',table:'improvements'}
+  ]
+ }
+};
+
+/* ---------- state ---------- */
+const BUILDER_VERSION='0.1 · 2026-10-12';
+let docId=null, registered=null, dyn={rounds:[],exceptions:[],improvements:[]}, checks={}, retro=false;
+let exampleValues={}; // id -> value filled by the worked example, until edited
+let pendingVerify=null;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const ns=s=>s?esc(s):'<span class="ns">not stated</span>';
+const v=id=>{const el=$(id);return el?(el.value||'').trim():'';};
+const phase=()=>document.body.classList.contains('phase-after')?'after':(DOCS[docId]&&DOCS[docId].phases[0]==='single'?'single':'before');
+
+/* ---------- start screen ---------- */
+const ans={1:null,2:null};
+function q(n,a){ans[n]=a;['y','n'].forEach(x=>$('q'+n+x).classList.toggle('on',x===a));
+  $('routeSft').classList.toggle('show',ans[1]==='n'); $('routeFull').classList.toggle('show',ans[1]==='y');
+  const note=$('q2note'); note.textContent= ans[2]==='y' ? 'Run it.' : ans[2]==='n' ? 'Run it, and name on the register what is not separated. The result is then recorded rather than supported.' : '';}
+const HASHES={sft:'#small-function-track',reg:'#round-register',wp:'#workpaper',rec:'#records'};
+let suppressHash=false;
+function setHash(h){ if(location.hash!==h){ suppressHash=true; history.pushState(null,'',h); suppressHash=false; } }
+function goStart(fromHistory){ if(!fromHistory&&isDirty()&&!confirm('Leave this document? Unsaved entries will be lost. Save the record file first if you need them.')) return; docId=null; document.body.classList.remove('building'); if(!fromHistory) setHash('#start');$('title').textContent='Supervisory capacity · document builder';}
+
+/* ---------- form building ---------- */
+function inputHtml(inp,after){
+  if(inp.type==='verify') return `<div style="margin:4px 0 0 0"><button type="button" class="addrow" onclick="verifyField('${inp.target}')">Check against the record file</button> <span class="chk" id="chk_${inp.target}"></span></div>`;
+  const reg=after?'data-after':'data-reg';
+  const lab=inp.label?`<label>${inp.label}</label>`:'';
+  if(inp.type==='textarea') return `${lab}<textarea id="${inp.id}" placeholder="${esc(inp.placeholder)}" ${reg}></textarea>`;
+  if(inp.type==='select') return `${lab}<select id="${inp.id}" ${reg}><option value="">choose</option>${inp.options.map(o=>`<option value="${esc(o)}">${esc(o)}</option>`).join('')}</select>`;
+  return `${lab}<input type="text" id="${inp.id}" placeholder="${esc(inp.placeholder)}" ${reg}>`;
+}
+function tableHtml(kind){
+  if(kind==='routes') return `<table class="grid routes"><thead><tr><th>Route</th><th>Answer</th><th>How</th></tr></thead><tbody>${ROUTES.map((r,i)=>`<tr><td style="width:38%"><b>${r[0]}</b><br><span style="color:#555">${r[1]}</span></td><td><select id="r_${i}_a" class="unset" data-reg><option value="">choose</option><option value="applies">applies</option><option value="none">none known</option><option value="notconsidered">not considered</option></select></td><td><input type="text" id="r_${i}_h" placeholder="how" data-reg></td></tr>`).join('')}</tbody></table>`;
+  if(kind==='design') return `<p class="hint" id="designcount"></p><table class="grid"><thead><tr><th>Element · design</th><th>Evidenced from</th><th>Adequate?</th><th>Basis</th></tr></thead><tbody>${DESIGN.map((d,i)=>`<tr><td style="width:34%"><b>${d[0]}</b><br><span style="color:#555">${d[1]}</span></td><td><input type="text" id="d_${i}_e" value="${esc(d[2])}" data-reg></td><td><select id="d_${i}_a" class="unset" data-reg><option value="">choose</option><option>Yes</option><option>Partly</option><option>No</option></select></td><td><input type="text" id="d_${i}_b" placeholder="one line" data-reg></td></tr>`).join('')}</tbody></table>`;
+  if(kind==='rounds') return `<div id="rounds"></div><button class="addrow" type="button" onclick="addRow('rounds')">Add round</button>`;
+  if(kind==='exceptions') return `<div id="exceptions"></div><button class="addrow" type="button" onclick="addRow('exceptions')">Add exception</button>`;
+  if(kind==='improvements') return `<div id="improvements"></div><button class="addrow" type="button" onclick="addRow('improvements')">Add improvement</button>`;
+  return '';
+}
+const ROWDEF={rounds:[['id','Round id'],['date','Date run'],['fp','Check code'],['result','Result as recorded']],exceptions:[['ref','Ref'],['exc','Exception'],['cause','Cause'],['action','Action'],['owner','Owner (role)'],['due','Due']],improvements:[['ref','Ref'],['imp','Improvement'],['element','Design element it bears on'],['owner','Owner (role)'],['due','Due']]};
+function addRow(kind,vals){ dyn[kind].push(vals||{}); renderRows(kind); render(); }
+function delRow(kind,i){ dyn[kind].splice(i,1); renderRows(kind); render(); }
+function renderRows(kind){
+  const host=$(kind); if(!host) return;
+  host.innerHTML=dyn[kind].map((row,i)=>`<div style="border:1px solid var(--line);padding:6px 8px;margin:6px 0;">${ROWDEF[kind].map(([k,l])=>`<label>${l}</label><input type="text" data-dyn="${kind}" data-i="${i}" data-k="${k}" value="${esc(row[k]||'')}">`).join('')}${kind==='rounds'?`<div style="margin:4px 0"><button class="addrow" type="button" onclick="verifyRow(${i})">Check against the record file</button> <span class="chk" id="chk_rounds_${i}"></span></div>`:''}<button class="addrow" type="button" onclick="delRow('${kind}',${i})">Remove</button></div>`).join('');
+  host.querySelectorAll('input').forEach(el=>el.addEventListener('input',e=>{dyn[kind][+e.target.dataset.i][e.target.dataset.k]=e.target.value;render();}));
+}
+function buildForm(){
+  const D=DOCS[docId]; let h='';
+  if(D.custom){ buildRecForm(); return; }
+  if(docId==='reg'){ h+=`<div class="consult" id="whenbox"><b>When is this register being completed?</b><div class="check"><input type="radio" name="when" id="when_before" checked onchange="setRetro(false)"><label for="when_before" style="margin:0;color:var(--ink);font-size:14px">Before the round, as a registration</label></div><div class="check"><input type="radio" name="when" id="when_after" onchange="setRetro(true)"><label for="when_after" style="margin:0;color:var(--ink);font-size:14px">After the round, retrospectively</label></div><p class="hint" id="whenhint"></p></div>`; }
+  if(D.phases.length===2){ h+=`<div class="phase" id="phasebar"><button id="btnBefore" class="on" onclick="setPhase('before')">${docId==='reg'?'Before the round':'Before the work'}</button><button id="btnAfter" onclick="setPhase('after')">${docId==='reg'?'After the round':'After the work'}</button></div>`;
+    h+=`<p class="hint" id="phasehint">${docId==='reg'?'A round is one run of the test: the seeded items are built, the reviewers work through them, the results are scored. Fill this tab when the test is designed and nobody has taken it yet. Switch to <b>After the round</b> once the results are scored; the entries here lock and the check code is computed.':'Fill this tab before the analysis starts. Switch to <b>After the work</b> when the finding is written; the entries here lock and the check code is computed.'}</p>`; }
+  h+=`<p class="hint">${D.intro}</p><div class="progress" id="progress"></div><p><button type="button" class="addrow" onclick="loadExample()">Load the worked example</button> <span class="hint" style="display:inline">Illustrative values from the repository, to see how the form is meant to be filled. Replace them before use.</span></p>`;
+  if(D.consult) h+=`<div class="consult"><div class="check"><input type="checkbox" id="h_consult" class="big" data-reg><span><b>Consultation comes first.</b><p class="hint">${CONSULT} Tick to confirm consultation has taken place or is not required for this engagement.</p></span></div></div>`;
+  if(D.phases.length===2) h+=`<div class="lockmsg after">Registered fields are locked. The registration check code was computed when you moved to this tab. To change a registered value, use <b>Amend</b> under the field; the registered value and the amendment both print.</div>`;
+  D.sections.forEach(sec=>{
+    const cls=sec.after?'after':'';
+    const legend=sec.key==='h'?'About this document':sec.legend;
+    h+=`<fieldset class="${cls}" data-field="${sec.key}"><legend>${legend}${sec.keyfield?'<span class="key">THE FIELD THIS REGISTER EXISTS FOR</span>':''}${sec.amend?`<button type="button" class="amendbtn" onclick="toggleAmend('${sec.key}')">Amend</button>`:''}</legend>`;
+    if(sec.hint) h+=`<p class="hint">${sec.hint}</p>`;
+    if(sec.inputs) h+=sec.inputs.map(i=>inputHtml(i,!!sec.after)).join('');
+    if(sec.table) h+=tableHtml(sec.table);
+    if(sec.amend) h+=`<div class="amend" data-for="${sec.key}"><div class="box"><label>Amended value</label><textarea id="a_${sec.key}_v"></textarea><label>Reason for the change</label><input type="text" id="a_${sec.key}_r"></div></div>`;
+    h+=`</fieldset>`;
+  });
+  $('form').innerHTML=h;
+  dyn={rounds:[],exceptions:[],improvements:[]}; renderRows('rounds'); renderRows('exceptions'); renderRows('improvements');
+  $('form').querySelectorAll('input,textarea,select').forEach(el=>{el.addEventListener('input',()=>{ if(el.id in exampleValues && (el.value||'').trim()!==exampleValues[el.id]) delete exampleValues[el.id]; if(exampleLoaded&&!exampleUntouched().length) exampleLoaded=false; markUnset();render();});el.addEventListener('change',()=>{markUnset();render();});});
+  markUnset();
+}
+function openDoc(id,force,fromHistory){ if(!force&&docId&&docId!==id&&isDirty()&&!confirm('Leave this document? Unsaved entries will be lost. Save the record file first if you need them.')) return; docId=id; registered=null; checks={}; exampleLoaded=false; retro=false; if(!fromHistory) setHash(HASHES[id]); document.body.className='building phase-before doc-'+id; $('title').textContent=DOCS[id].title; const lm=$('loadmsg'); if(lm){lm.style.display='none';lm.textContent='';} buildForm(); render(); window.scrollTo(0,0); }
+function toggleAmend(k){document.querySelector(`.amend[data-for="${k}"]`).classList.toggle('open');render();}
+function markUnset(){document.querySelectorAll('select.unset, select[id^="r_"], select[id^="d_"]').forEach(s=>s.classList.toggle('unset',!s.value));}
+function regInputs(){return Array.from(document.querySelectorAll('[data-reg]'));}
+
+/* ---------- snapshot, hash, phases ---------- */
+function collectRegistered(){
+  const fields={}; regInputs().forEach(el=>{ fields[el.id]= el.type==='checkbox' ? (el.checked?'yes':'no') : (el.value||'').trim(); });
+  const tables={};
+  if(docId==='sft') tables.routes=ROUTES.map((r,i)=>({route:r[0],answer:v(`r_${i}_a`)||'notconsidered',how:v(`r_${i}_h`)}));
+  if(docId==='wp'){ tables.design=DESIGN.map((d,i)=>({element:d[0],evidenced:v(`d_${i}_e`),adequate:v(`d_${i}_a`),basis:v(`d_${i}_b`)})); tables.rounds=dyn.rounds.map(r=>({...r})); tables.exceptions=dyn.exceptions.map(r=>({...r})); tables.improvements=dyn.improvements.map(r=>({...r})); }
+  return {fields,tables};
+}
+function canonical(obj){const sk=o=>Array.isArray(o)?o.map(sk):(o&&typeof o==='object'?Object.keys(o).sort().reduce((a,k)=>{a[k]=sk(o[k]);return a;},{}):o);return JSON.stringify(sk(obj));}
+async function sha256(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
+async function setPhase(p){
+  if(p==='after'&&!registered&&docId==='reg'&&v('f_crit')&&!/\d/.test(v('f_crit'))){ if(!confirm(`The criterion has no number: '${v('f_crit')}'. A result cannot be measured against it. Lock it anyway?`)) return; }
+  if(p==='after'&&!registered){const s=collectRegistered(); s.hash=await sha256(canonical({fields:s.fields,tables:s.tables})); registered=s;}
+  if(p==='before'&&registered){ if(!confirm('Going back unlocks the registered fields and discards the registration check code. Continue?')) return; registered=null; document.querySelectorAll('.amend').forEach(d=>d.classList.remove('open')); document.querySelectorAll('[id^="a_"]').forEach(el=>el.value=''); }
+  document.body.className='building phase-'+p;
+  $('btnBefore').classList.toggle('on',p==='before'); $('btnAfter').classList.toggle('on',p==='after');
+  regInputs().forEach(el=>el.disabled=(p==='after'));
+  render();
+}
+function amendBlock(k){const val=v(`a_${k}_v`),r=v(`a_${k}_r`); if(!val&&!r) return ''; return `<div class="amd"><p><b>Amended after registration.</b> ${ns(val)}</p><p>Reason: ${ns(r)}</p></div>`;}
+
+/* ---------- renderers ---------- */
+let wpHash='';
+function render(){
+  if(!docId) return;
+  const after=phase()==='after';
+  const snap=(after&&registered)?registered:collectRegistered();
+  const g=id=>snap.fields[id]||'';
+  const today=new Date().toISOString().slice(0,10);
+  let h='';
+  if(docId==='rec'){ let rh=(Object.values(recRows).some(r=>r.length)||v('h_round'))?renderRec(today):`<p class="empty">The records appear here as you add rows.</p>`; if(exampleLoaded) rh=rh.replace('<p class="stand">','<p class="warn">Illustrative rows from the templates are on this page. Remove them before use.</p><p class="stand">'); $('doc').innerHTML=rh; return; }
+  if(docId==='sft') h=renderSft(g,snap,after,today);
+  if(docId==='reg'){ h=renderReg(g,snap,after&&!retro,today); if(retro){ sha256(canonical(snap)).then(x=>{wpHash=x;const el=$('retrohash'); if(el) el.textContent=x;}); } }
+  if(docId==='wp'){ h=renderWp(g,snap,today); sha256(canonical(snap)).then(x=>{wpHash=x;const el=$('wphash'); if(el) el.textContent=x;}); }
+  if(exampleLoaded){ const un=exampleUntouched(); h=h.replace('<p class="stand">',`<p class="warn">Illustrative values from the worked example remain in ${un.length} field${un.length===1?'':'s'}: ${un.slice(0,8).map(id=>esc(exampleLabel(id))).join('; ')}${un.length>8?'; …':''}. Replace them before use.</p><p class="stand">`); }
+  const code=(after&&registered)?registered.hash:((docId==='wp'||retro)?wpHash:'');
+  const refv=(v('h_ref')||v('h_round')||v('h_ctrl')||'').trim();
+  h=`<table class="pw"><thead><tr><td><div class="printhead">${refv?esc(refv)+' · ':''}${esc(DOCS[docId].title.toLowerCase())}${code?' · check code '+code.slice(0,16)+'…':''}</div></td></tr></thead><tbody><tr><td>`+h+`</td></tr></tbody></table>`;
+  $('doc').innerHTML= isDirty()? h : `<p class="empty">The document appears here as you type.</p>`;
+  updateProgress(); applySepRule();
+}
+const CODE_NOTES={
+  sft:"<b>About the check code.</b> A code computed from the registered text (SHA-256 of the header and fields 1 to 8a, as saved in the record file). If any registered field is changed, the code no longer matches. It shows the text was not altered after registration; it does not show when it was registered or whether it is true. The date becomes checkable when the code is sent to someone outside the function on the day it is computed; a dated email, ticket or public post is enough.",
+  reg:"<b>About the check code.</b> A code computed from the registered text (SHA-256 of the header and fields 1 to 9, as saved in the record file). If any registered field is changed, the code no longer matches. It shows the text was not altered after registration; it does not show when it was registered or whether it is true. The date becomes checkable when the code is sent to someone outside the function on the day it is computed; a dated email, ticket or public post is enough.",
+  retro:"<b>About the record check code.</b> A code computed from this record's fields (SHA-256 of the fields as saved in the record file). If any field is changed, the code no longer matches. It was computed after the round and shows nothing about what was fixed in advance.",
+  wp:"<b>About the document check code.</b> A code computed from this document's fields (SHA-256 of the fields as saved in the record file). If any field is changed, the code no longer matches."};
+function codeNote(kind){return kind&&CODE_NOTES[kind]?`<p class="foot">${CODE_NOTES[kind]}</p>`:'';}
+function idRow(label,val){return `<tr><td>${label}</td><td>${val}</td></tr>`;}
+function foot(extra){return `<p class="foot">${extra} Roles, not names, appear on this document. Format: supervisory-capacity-assessment repository (dturkina99), CC BY 4.0; the format is provided for information and is not legal, compliance or audit advice. The content of this document is the preparing organisation's own. Assembled with the document builder, version ${BUILDER_VERSION}, which computes no results; counts shown are of entries made in it.</p>`;}
+
+const SFT_FIELDS=[['1 Engagement',['f_subject','f_scopedate','f_start','f_periodby']],['2 Function',['f_function']],['3 In scope / out of scope',['f_in','f_out']],['4 Evidence against time',['f_volume','f_time','f_budget']],['5 Portion delegated',['f_readbyperson','f_readbytool','f_spotchecks','f_tools','f_toolrel']],['6 Verification',['f_verify']],['7 Routes',[]],['8 Independence',['f_struct','f_oper','f_tooling']],['8a Condition to decline',['f_decline']],['10 What it does not support',['f_notsupport']]];
+function sftCompleteness(g){
+  const notStated=[]; let stated=0;
+  SFT_FIELDS.forEach(([label,ids])=>{ let ok; if(label.startsWith('7')) ok=(registered&&registered.tables.routes||[]).some(r=>r.answer&&r.answer!=='notconsidered'); else if(label.startsWith('10')) ok=!!v('f_notsupport'); else ok=ids.some(id=>{const x=(g(id)||'').trim(); return x&&!/^not stated$/i.test(x);}); if(ok) stated++; else notStated.push(label); });
+  return {stated,total:SFT_FIELDS.length,notStated,text:`${stated} of ${SFT_FIELDS.length} fields stated${notStated.length?' · not stated: '+notStated.join('; '):''}.`};
+}
+function renderSft(g,snap,after,today){
+  let h=`<div class="titlerow"><h2>Small function track · ${after?'declaration':'registration'}</h2><span class="status">${after?'Declared':'Registration'}</span></div>
+  <table class="idblock">${idRow('Reference',ns(g('h_ref')))}${idRow('Prepared by',ns(g('h_prep')))}${idRow('Reports to',ns(g('h_reports')))}${idRow('Registered',ns(g('h_regdate')))}${after?idRow('Completed',ns(v('f_done'))):''}${idRow('Printed',today)}${after?idRow('Check code',`<span class="hash">${registered.hash}</span> <button type="button" class="copy" onclick="copyCode('${registered.hash}',this)">Copy</button>`)+idRow('Code sent to',ns(v('f_codesent'))+', '+ns(v('f_codesentdate'))):''}</table>
+  <p class="stand"><b>Declared</b> is a self-description of the engagement's conditions, not a conformity claim. Attach to the technical documentation for the system under review, alongside the instructions for use.${after?'':' Fields 9 and 10 are completed after the work.'}</p>`;
+  const R=snap.tables.routes;
+  h+=`<h3>1 · Engagement, dates</h3><table class="kv">${idRow('Subject',ns(g('f_subject')))}${idRow('Scope agreed',ns(g('f_scopedate')))}${idRow('Work starts',ns(g('f_start')))}${idRow('Period under review set by',ns(g('f_periodby')))}</table>${after?amendBlock('1'):''}`;
+  h+=`<h3>2 · Function</h3><p>${ns(g('f_function'))}</p>${after?amendBlock('2'):''}`;
+  h+=`<h3>3 · In scope / out of scope</h3><p><b>In:</b> ${ns(g('f_in'))}</p><p><b>Out:</b> ${ns(g('f_out'))}</p>${after?amendBlock('3'):''}`;
+  h+=`<h3>4 · Evidence against time</h3><table class="keep"><tr><th>Volume</th><th>Time</th><th>Budget or credits</th></tr><tr><td>${ns(g('f_volume'))}</td><td>${ns(g('f_time'))}</td><td>${ns(g('f_budget'))}</td></tr></table><p class="ns">No ratio is computed.</p>${after?amendBlock('4'):''}`;
+  h+=`<h3>5 · Portion delegated, to what</h3><table class="keep"><tr><th>Read end to end by a person</th><th>Read by a tool only</th><th>Spot-checks planned</th></tr><tr><td>${ns(g('f_readbyperson'))}</td><td>${ns(g('f_readbytool'))}</td><td>${ns(g('f_spotchecks'))}</td></tr></table><p>Tools: ${ns(g('f_tools'))}. Relation of the tools to the subject: ${ns(g('f_toolrel'))}.</p>${after?amendBlock('5'):''}`;
+  h+=`<h3>6 · Verification of that work</h3><p>${ns(g('f_verify'))}</p>${after?amendBlock('6'):''}`;
+  const c={applies:0,none:0,notconsidered:0}; R.forEach(r=>c[r.answer]=(c[r.answer]||0)+1);
+  const lab=a=>a==='applies'?'applies':a==='none'?'<span class="ns">none known</span>':'<span class="ns">not considered</span>';
+  h+=`<h3>7 · What would have prevented detection</h3><p>${c.applies} applying · ${c.none} none known · ${c.notconsidered} not considered.</p><table><tr><th>Route</th><th>Answer</th><th>How</th></tr>${R.map(r=>`<tr><td>${esc(r.route)}</td><td>${lab(r.answer)}</td><td>${r.answer==='applies'?ns(r.how):(r.answer==='none'?esc(r.how||''):'')}</td></tr>`).join('')}</table><p class="ns">Absence of a known route is not evidence there was none: it means the team did not find one. A route not considered was not examined.</p>${after?amendBlock('7'):''}`;
+  h+=`<h3>8 · Independence available</h3><p>Structural: ${ns(g('f_struct'))}. Operational: ${ns(g('f_oper'))}. Tooling: ${ns(g('f_tooling'))}.</p>${after?amendBlock('8'):''}`;
+  h+=`<h3>8a · Registered condition to decline</h3><p>${ns(g('f_decline'))}</p>${after?amendBlock('8a'):''}`;
+  if(after){ const comp=sftCompleteness(g); h+=`<h3>9 · Status</h3><p><b>Declared.</b> Basis: ${ns(v('f_basis'))}</p><p class="ns">${comp.text}</p><h3>10 · What it does not support</h3><p>${ns(v('f_notsupport'))}</p>`; }
+  else { h+=`<h3>9 · Status</h3><p class="ns">Completed after the work. On this track the status is always Declared.</p><h3>10 · What it does not support</h3><p class="ns">Completed after the work.</p>`; }
+  return h+codeNote(after?'sft':'')+foot("Purpose limitation: this is a control-design format. It creates no performance data about individuals and supports no inference about anyone's competence. The values supported, recorded, qualified and not determined belong to a full round and do not apply here.");
+}
+
+function renderReg(g,snap,after,today){
+  const sameDay=g('f_regdate')&&g('f_regdate')===g('f_rundate');
+  const lateReg=!retro&&g('f_regdate')&&g('f_rundate')&&g('f_regdate')>g('f_rundate');
+  const regStatus=retro?('Retrospective · '+(v('f_status')||'status not stated')):(after?(v('f_status')||'status not stated'):'Registration');
+  let h=`<div class="titlerow"><h2>Round register · ${retro?'record (retrospective)':(after?'record':'registration')}</h2><span class="status">${esc(regStatus)}</span></div>
+  <table class="idblock">${idRow('Round id',ns(g('h_round')))}${idRow('Prepared by',ns(g('h_prep')))}${idRow('Reports to',ns(g('h_reports')))}${retro?idRow('Completed',ns(v('f_done'))):idRow('Registered',ns(g('f_regdate')))}${idRow('Round runs',ns(g('f_rundate')))}${(after&&!retro)?idRow('Completed',ns(v('f_done'))):''}${idRow('Printed',today)}${idRow('Consultation confirmed',g('h_consult')==='yes'?'yes':'<span class="ns">not confirmed</span>')}${idRow('Previous round check code',g('h_prev')?'<span class="hash">'+esc(g('h_prev'))+'</span>'+checkNote('h_prev'):'<span class="ns">none (first round)</span>')}${after?idRow('Check code',`<span class="hash">${registered.hash}</span> <button type="button" class="copy" onclick="copyCode('${registered.hash}',this)">Copy</button>`)+idRow('Code sent to',ns(v('f_codesent'))+', '+ns(v('f_codesentdate'))):''}${retro?idRow('Record check code',`<span class="hash" id="retrohash">${wpHash}</span> <button type="button" class="copy" onclick="copyCode(document.getElementById('retrohash').textContent,this)">Copy</button>`):''}</table>
+  <p class="stand">${retro?'Completed after the round from the records available; no field was fixed before the round ran.':'Completed before the round runs and not edited afterwards; amendments are printed with their reasons.'}</p>`;
+  if(retro) h+=`<p class="warn">Completed after the round. The criterion was not fixed in advance; the result is recorded, not supported.</p>`;
+  else if(sameDay) h+=`<p class="warn">Registered and run on the same day: the registration establishes nothing about what was fixed in advance.</p>`;
+  else if(lateReg) h+=`<p class="warn">The registration date is later than the date the round ran, which contradicts "before the round". If the register was completed after the round, say so at the top of the form.</p>`;
+  h+=`<h3>1 · Dates</h3><p>${retro?'Register completed':'Registered'} ${ns(retro?v('f_done'):g('f_regdate'))}; round ran ${ns(g('f_rundate'))}.</p>${after?amendBlock('1'):''}`;
+  h+=`<h3>2 · Population, and the rule</h3><p>${ns(g('f_pop'))}</p>${after?amendBlock('2'):''}`;
+  h+=`<h3>3 · Criterion, and when fixed</h3><p><b>${ns(g('f_crit'))}</b> · fixed ${ns(g('f_critdate'))} by ${ns(g('f_critby'))}</p>${after?amendBlock('3'):''}`;
+  h+=`<h3>4 · Triggers that invalidate it</h3><p>${ns(g('f_triggers'))}</p>${after?amendBlock('4'):''}`;
+  h+=`<h3>5 · Roles</h3><table class="keep"><tr><th>Set builder</th><th>Administrator</th><th>Scorer</th></tr><tr><td>${ns(g('f_builder'))}</td><td>${ns(g('f_admin'))}</td><td>${ns(g('f_scorer'))}</td></tr></table>${after?amendBlock('5'):''}`;
+  h+=`<h3>6 · Separations absent</h3><p>${ns(g('f_sepabsent'))}</p>${after?amendBlock('6'):''}`;
+  h+=`<h3>7 · Conditions planned</h3><p>${ns(g('f_cond'))}</p>${after?amendBlock('7'):''}`;
+  h+=`<h3>8 · Consequence of a poor result</h3><p>${ns(g('f_conseq'))}</p>${after?amendBlock('8'):''}`;
+  h+=`<h3>9 · Publication</h3><p>${ns(g('f_pub'))}</p>${after?amendBlock('9'):''}`;
+  if(after||retro){ h+=`<h3>10 · Result</h3><p>Result against the criterion: <b>${ns(v('f_result'))}</b>. Status: <b>${ns(v('f_status'))}</b>. Basis: ${ns(v('f_statusbasis'))}</p><p>${retro?'Triggers that fired during the round':'Registered triggers fired during the round'}: ${ns(v('f_trigfired'))}.</p><p>Recorded in the round sequence whichever way it went.</p>`; }
+  else h+=`<h3>10 · Result</h3><p class="ns">Completed after the round.</p>`;
+  return h+codeNote(retro?'retro':(after?'reg':''))+foot("Status vocabulary: supported, recorded, qualified, not determined, as set out in the root README. Results are not used for individual performance management unless separately agreed and disclosed in advance.");
+}
+
+function renderWp(g,snap,today){
+  const D=snap.tables.design, R=snap.tables.rounds||[], X=snap.tables.exceptions||[];
+  const opeff=(g('f_opeff')||'').replace(/\s*\(requires an entry in section 8\)/,''); const wpStatus=opeff?'Operating effectiveness · '+opeff:'Not concluded';
+  let h=`<div class="titlerow"><h2>Workpaper · Supervisory capacity</h2><span class="status">${esc(wpStatus)}</span></div>
+  <table class="idblock">${idRow('Control reference',ns(g('h_ctrl')))}${idRow('System',ns(g('h_system')))}${idRow('Period',ns(g('h_period')))}${idRow('Prepared by',ns(g('h_prep'))+', '+ns(g('h_prepdate')))}${idRow('Reviewed by',ns(g('h_rev'))+', '+ns(g('h_revdate')))}${idRow('Technical file',ns(g('h_file')))}${idRow('Printed',today)}${idRow('Consultation confirmed',g('h_consult')==='yes'?'yes':'<span class="ns">not confirmed</span>')}${idRow('Document check code',`<span class="hash" id="wphash">${wpHash}</span> <button type="button" class="copy" onclick="copyCode(document.getElementById('wphash').textContent,this)">Copy</button>`)}</table>
+  <p class="stand">Control testing workpaper for human oversight of ${ns(g('h_system'))}, ${ns(g('h_period'))}. This workpaper carries the control description, the purpose limitation, the design conclusion and the exceptions. Scope, results and population are on the scorecard for the round; what was fixed before the round is on the round register.</p>`;
+  h+=`<h3>Documents for this function</h3><table class="keep"><tr><th>Document</th><th>Reference</th><th>Filed at</th></tr><tr><td>Round register</td><td>${ns(g('f_doc_reg_ref'))}</td><td>${ns(g('f_doc_reg_loc'))}</td></tr><tr><td>Small function track declaration</td><td>${ns(g('f_doc_sft_ref'))}</td><td>${ns(g('f_doc_sft_loc'))}</td></tr><tr><td>Scorecard for the round</td><td>${ns(g('f_doc_score_ref'))}</td><td>${ns(g('f_doc_score_loc'))}</td></tr><tr><td>This workpaper</td><td>${ns(g('f_doc_wp_ref'))}</td><td>${ns(g('f_doc_wp_loc'))}</td></tr></table>`;
+  h+=`<h3>1 · Control description</h3><p>For ${ns(g('h_system'))}, the competence of persons assigned to ${ns(g('h_task'))} is assessed before assignment and reassessed at ${ns(g('h_interval'))}, on the same footing as their independence. Assessment covers the specific capabilities the oversight task requires, is performed under conditions resembling operation, and is recorded.</p>`;
+  h+=`<h3>2 · Risk addressed</h3><p>Consequential decisions are allocated to human judgment. If that judgment cannot detect the errors it is there to catch, the control is present in the design and absent in operation. The organisation cannot distinguish the two by inspecting role assignments.</p><p>Two features of AI-assisted work make this more than theoretical. Assisted performance can remain high while unassisted capability declines, so a measure taken with the tool present may not detect the change. And a confident, fluent, incorrect output is harder to challenge than an obviously poor one.</p>`;
+  h+=`<h3>3 · Purpose limitation</h3><p>This assessment is conducted for ${ns(g('f_purpose'))}. ${g('f_purpose')&&g('f_purpose')!=='control-testing purposes only'?'Use of results for individual performance management has been separately agreed and disclosed to the persons assessed in advance.':'Results are not used for individual performance management.'}</p><p>Independent judgment on novel questions is not assessable by these methods. It is recorded as not assessed on the scorecard rather than proxied.</p>`;
+  const allRetro=R.length&&R.every((r,i)=>checks['rounds_'+i]&&checks['rounds_'+i].retro);
+  h+=`<h3>Rounds this workpaper rests on</h3>`+(allRetro?`<p class="warn">No round in this sequence was registered before it ran.</p>`:'')+(R.length?`<table><tr><th>Round</th><th>Date</th><th>Check code</th><th>Checked</th><th>Result as recorded</th></tr>${R.map((r,i)=>`<tr><td>${ns(r.id)}</td><td>${ns(r.date)}</td><td class="hash">${ns(r.fp)}</td><td>${checkCell('rounds',i)}</td><td>${ns(r.result)}</td></tr>`).join('')}</table>`:`<p class="ns">No rounds listed. A design conclusion can still be reached; operating effectiveness is then Not tested.</p>`);
+  const cnt={Yes:0,Partly:0,No:0,'':0}; D.forEach(d=>cnt[d.adequate]=(cnt[d.adequate]||0)+1);
+  const dc=$('designcount'); if(dc) dc.textContent=(cnt['']?`${cnt['']} of 9 rows still unanswered.`:'All nine rows answered.')+(Object.values(checks).some(c=>c.retro)?' A retrospective round is listed: it cannot evidence "Criterion set in advance"; answer No or Partly for that row.':'');
+  h+=`<h3>4 · Control design</h3><p>Assessed independently of whether the control operated in the period. ${cnt.Yes} adequate · ${cnt.Partly} partly · ${cnt.No} not adequate · ${cnt['']} not assessed.</p><table><tr><th>Element</th><th>Design</th><th>Evidenced from</th><th>Adequate?</th><th>Basis</th></tr>${D.map((d,i)=>`<tr><td>${esc(d.element)}</td><td>${esc(DESIGN[i][1])}</td><td>${ns(d.evidenced)}</td><td>${d.adequate?esc(d.adequate):'<span class="ns">not assessed</span>'}</td><td>${ns(d.basis)}</td></tr>`).join('')}</table>`;
+  h+=`<h3>5 · Results</h3><p>See the scorecard for round ${ns(g('f_scoreround'))}. ${ns(g('f_results'))}</p>`;
+  h+=`<h3>6 · Exceptions and remediation</h3>`+(X.length?`<table><tr><th>Ref</th><th>Exception</th><th>Cause</th><th>Action</th><th>Owner</th><th>Due</th></tr>${X.map(x=>`<tr><td>${ns(x.ref)}</td><td>${ns(x.exc)}</td><td>${ns(x.cause)}</td><td>${ns(x.action)}</td><td>${ns(x.owner)}</td><td>${ns(x.due)}</td></tr>`).join('')}</table>`:`<p class="ns">None recorded.</p>`);
+  const clean=x=>x.replace(/\s*\(requires an entry in section 8\)/,'');
+  h+=`<h3>7 · Conclusion</h3><table class="keep"><tr><td>Design</td><td><b>${ns(clean(g('f_design')))}</b>. Basis: ${ns(g('f_designbasis'))}</td></tr><tr><td>Operating effectiveness</td><td><b>${ns(clean(g('f_opeff')))}</b>. Basis: ${ns(g('f_opbasis'))}</td></tr><tr><td>Capabilities not covered by this test</td><td>${ns(g('f_notcovered'))}</td></tr><tr><td>Review</td><td><b>${ns(g('f_review'))}</b>${g('f_reviewnote')?'. '+esc(g('f_reviewnote')):''}</td></tr></table>${R.some((r,i)=>!checks['rounds_'+i])?'<p class="warn">One or more rounds listed above have not been checked against their record files.</p>':''}<p class="ns">A design conclusion can be reached on the register and the control design table alone. An operating effectiveness conclusion requires a round with a criterion fixed in advance and stated separations; where either is missing, the correct entry is Not tested.</p>`;
+  const I=snap.tables.improvements||[]; const needsImp=/with improvements/.test(g('f_design')+g('f_opeff'));
+  h+=`<h3>8 · Improvements</h3>`+(I.length?`<table><tr><th>Ref</th><th>Improvement</th><th>Design element</th><th>Owner</th><th>Due</th></tr>${I.map(x=>`<tr><td>${ns(x.ref)}</td><td>${ns(x.imp)}</td><td>${ns(x.element)}</td><td>${ns(x.owner)}</td><td>${ns(x.due)}</td></tr>`).join('')}</table>`:(needsImp?`<p class="warn">A conclusion of Effective with improvements requires at least one improvement listed here.</p>`:`<p class="ns">None.</p>`));
+  return h+codeNote('wp')+foot("Regulatory mapping: where the organisation deploys high-risk AI systems in the EU, Article 26(2) of Regulation (EU) 2024/1689 requires that natural persons assigned to human oversight have the necessary competence, training and authority. This workpaper produces evidence relevant to that obligation: competence from records 01, 03 and 04; training from record 01; authority from record 01 (authority to halt). It is not a compliance opinion.");
+}
+
+function exampleUntouched(){ return Object.keys(exampleValues).filter(id=>{const el=$(id); return el && (el.value||'').trim()===exampleValues[id];}); }
+function exampleLabel(id){ const D=DOCS[docId]; for(const sec of (D.sections||[])) for(const i of (sec.inputs||[])) if(i.id===id) return (sec.legend.replace(/^\S+ · /,'')+': '+(i.label||'')).replace(/: $/,''); return id; }
+/* ---------- retrospective register ---------- */
+function setRetro(on){
+  retro=on;
+  const bar=$('phasebar'), ph=$('phasehint'), hint=$('whenhint'), lock=document.querySelector('.lockmsg');
+  if(on){
+    if(registered&&!confirm('Switching to a retrospective register discards the registration check code. Continue?')){ $('when_before').checked=true; retro=false; return; }
+    registered=null; document.body.className='building phase-after'; regInputs().forEach(el=>el.disabled=false);
+    if(bar) bar.style.display='none'; if(ph) ph.style.display='none'; if(lock) lock.style.display='none';
+    document.querySelectorAll('.amend').forEach(d=>{d.style.display='none';}); document.querySelectorAll('legend .amendbtn').forEach(b=>b.style.display='none');
+    hint.textContent='A register completed after the results are known cannot show the criterion was fixed in advance. Everything else on it is still a record of the round. The next round can be registered before it runs.';
+  } else {
+    document.body.className='building phase-before'; $('btnBefore').classList.add('on'); $('btnAfter').classList.remove('on');
+    if(bar) bar.style.display=''; if(ph) ph.style.display=''; if(lock) lock.style.display='';
+    document.querySelectorAll('.amend').forEach(d=>{d.style.display='';}); document.querySelectorAll('legend .amendbtn').forEach(b=>b.style.display='');
+    hint.textContent='';
+  }
+  const st=$('f_status'); if(st){ Array.from(st.options).forEach(o=>{ if(o.value==='supported'||o.value==='qualified'){ o.disabled=on; o.textContent=o.value+(on?' (not available for a retrospective register)':''); } }); if(on&&(st.value==='supported'||st.value==='qualified')) st.value=''; }
+  render();
+}
+function applySepRule(){
+  if(docId!=='reg') return; const st=$('f_status'); if(!st) return;
+  const sep=(v('f_sepabsent')||'').trim().toLowerCase(); const absent= sep && !/^(none|none\.|n\/a|no)$/.test(sep);
+  Array.from(st.options).forEach(o=>{ if(o.value==='supported'||o.value==='qualified'){ const off=absent||retro; o.disabled=off; o.textContent=o.value+(off?(retro?' (not available for a retrospective register)':' (not available: a separation is absent, see field 6)'):''); } });
+  if(absent&&(st.value==='supported'||st.value==='qualified')) st.value='';
+}
+/* ---------- name check ---------- */
+const NAME_RE=/^(?:[A-Z]\.?\s*)?[A-Z][a-z]+(?:[\s-][A-Z][a-z]+)+$|^[A-Z]\.\s*[A-Z][a-z]+$/;
+function looksLikeName(x){ x=(x||'').trim(); if(!x||x.length>40) return false; if(/\b(line|risk|lead|head|officer|manager|team|second|first|model|assurance|audit|qa|review|committee|function|not stated|n\/a)\b/i.test(x)) return false; return NAME_RE.test(x); }
+function nameWarning(){
+  const flagged=[];
+  ['h_prep','h_reports','h_rev','f_critby','f_builder','f_admin','f_scorer','f_codesent'].forEach(id=>{ const el=$(id); if(el&&looksLikeName(el.value)) flagged.push((el.previousElementSibling&&el.previousElementSibling.textContent)||id); });
+  if(docId==='rec'){ let n=0; Object.values(recRows).forEach(rows=>rows.forEach(r=>{ if(looksLikeName(r.reviewer_id)||looksLikeName(r.assessed_by)) n++; })); if(n) flagged.push(`${n} record row${n===1?'':'s'} (reviewer_id or assessed_by)`); }
+  if(docId==='wp') dyn.exceptions.concat(dyn.improvements).forEach(r=>{ if(looksLikeName(r.owner)) flagged.push('Owner on an exception or improvement'); });
+  return flagged;
+}
+function nameGate(){ const f=nameWarning(); if(!f.length) return true; return confirm('These look like personal names; the format asks for roles and pseudonymous ids:\n\n'+f.join('\n')+'\n\nContinue anyway?'); }
+/* ---------- progress ---------- */
+function updateProgress(){
+  const el=$('progress'); if(!el) return;
+  const after=phase()==='after';
+  const inputs=Array.from(document.querySelectorAll(retro?'[data-reg],[data-after]':(after?'[data-after]':'[data-reg]'))).filter(i=>i.type!=='checkbox'&&!/^r_\d+_h$/.test(i.id)&&!/^d_\d+_[eb]$/.test(i.id));
+  const done=inputs.filter(i=>(i.value||'').trim()).length;
+  const pct=inputs.length?Math.round(100*done/inputs.length):0;
+  el.innerHTML=`${done} of ${inputs.length} ${after?'fields for this phase':'fields'} answered<div class="bar"><i style="width:${pct}%"></i></div>`;
+}
+/* ---------- worked examples ---------- */
+let exampleLoaded=false;
+const EXAMPLES={
+ sft:{fields:{h_ref:'EXAMPLE-SFT',h_prep:'lead reviewer',h_reports:'not stated',h_regdate:'2026-07-29',f_subject:'Independent review of an agent incident (illustrative)',f_scopedate:'2026-07-29',f_start:'2026-07-30; six days on site',f_periodby:'the subject',f_function:'Three researchers, two from the reviewing organisation',f_in:'Agent activity 7 to 13 July',f_out:'Earlier training incidents; host remediation',f_volume:'~1,300 transcripts, most running to millions of tokens',f_time:'six days',f_budget:'not stated',f_readbyperson:'not stated',f_readbytool:'substantially; share not stated',f_spotchecks:'spot-checking attempted; not achievable at this volume',f_tools:'a model of the same family as the one under review',f_toolrel:'same family as the system under review',f_verify:'Spot-checking attempted, not achievable at this volume',f_struct:'Two of three from the reviewing organisation; right to publish',f_oper:'None: the same three people build, run and read',f_tooling:'not stated',f_decline:'not stated'},
+      routes:[{answer:'none',how:''},{answer:'applies',how:'some activity not captured'},{answer:'applies',how:'part of the record altered by the systems under review'},{answer:'none',how:''},{answer:'none',how:''},{answer:'none',how:''},{answer:'applies',how:'deception by the analysis tool could not be ruled out'},{answer:'none',how:''},{answer:'none',how:''},{answer:'none',how:''}],
+      after:{f_basis:'Declared, and published in full including the limits above',f_done:'2026-08-05',f_notsupport:'Any claim that behaviour of this kind would be caught next time under the same conditions'}},
+ reg:{fields:{h_round:'EXAMPLE-R1',h_prep:'second line',h_reports:'head of model risk',f_regdate:'2026-07-14',f_rundate:'2026-07-28',f_pop:'All 12 analysts rostered to the decline queue in week 30',f_crit:'Detects 12 of 15 unsupported declines',f_critdate:'2026-07-14',f_critby:'second line',f_triggers:'Model version change; scope extended to a new product; a new analyst joins the queue',f_builder:'model risk',f_admin:'QA',f_scorer:'second line',f_sepabsent:'None',f_cond:'Embedded in the live queue, five days; reviewers told a round would run in Q3; presented confidence varied',f_conseq:'Remediation and interim restriction on unsupervised review',f_pub:'Recorded in the round sequence whichever way it goes'},
+      after:{f_result:'11 of 15 detected',f_status:'qualified',f_statusbasis:'Below the criterion by one; no separation absent; presented confidence varied as planned',f_trigfired:'none',f_done:'2026-07-28'}},
+ wp:{fields:{h_ctrl:'HO-01',h_system:'Decline queue model, v3',h_task:'review of declines above threshold before they take effect',h_interval:'six months, and on any registered trigger',h_period:'Q3 2026',h_prep:'second line',h_prepdate:'2026-08-05',h_rev:'head of model risk',h_revdate:'2026-08-08',h_file:'TF-DQ-v3',f_doc_reg_ref:'2026-R1',f_doc_reg_loc:'technical file, section 9',f_doc_sft_ref:'not applicable',f_doc_sft_loc:'',f_doc_score_ref:'2026-R1 scorecard',f_doc_score_loc:'technical file, section 9',f_doc_wp_ref:'HO-01',f_doc_wp_loc:'technical file, section 9',f_purpose:'control-testing purposes only',f_scoreround:'2026-R1',f_results:'11 of 15 unsupported declines detected against a criterion of 12; distribution on the scorecard; unassisted capability not measured this round',f_design:'Effective with improvements (requires an entry in section 8)',f_designbasis:'All elements evidenced except unassisted capability; reassessment interval stated without a record 04 schedule',f_opeff:'Deficient',f_opbasis:'Round 2026-R1 below the criterion by one; remediation and interim restriction applied as registered',f_review:'agreed with comments',f_reviewnote:'Schedule record 04 before R2 and restate the interval in the plan',f_notcovered:'Independent judgment on novel questions; recorded as not assessed'},
+      design:[['Yes','Record 01 complete for all 12'],['Yes','Register 2026-R1, criterion fixed 14 days before'],['Yes','Builder, administrator and scorer in three functions'],['Yes','Method and conditions in record 01'],['Partly','Interval stated; triggers listed; no record 04 date'],['Yes','Record 02 for week 30'],['Yes','Register field 8'],['Yes','authority_to_halt stated for all 12'],['No','Record 04 not run']],
+      rounds:[{id:'2026-R1',date:'2026-07-28',fp:'paste from the round record, or check against its record file',result:'11 of 15, qualified'}],
+      exceptions:[{ref:'E1',exc:'Unassisted capability not measured',cause:'Record 04 not scheduled',action:'Schedule record 04 before R2',owner:'second line',due:'2026-11'}],
+      improvements:[{ref:'I1',imp:'State the record 04 interval in the risk management plan',element:'Unassisted capability measured',owner:'second line',due:'2026-11'}]}
+};
+function loadExample(){
+  if(isDirty()&&!confirm('Replace what is on the page with the worked example?')) return;
+  if(docId==='rec'){ openDoc('rec',true); $('h_round').value='EXAMPLE-R1'; REC_ORDER.forEach(id=>{ recRows[id]=(REC_EXAMPLES[id]||[]).map(r=>({...r, round_id:'EXAMPLE-R1'})); renderRecRows(id); }); exampleLoaded=true; render(); return; }
+  const ex=EXAMPLES[docId]; openDoc(docId,true);
+  Object.entries(ex.fields).forEach(([id,val])=>{const el=$(id); if(el) el.value=val;});
+  if(ex.routes) ex.routes.forEach((r,i)=>{$(`r_${i}_a`).value=r.answer; $(`r_${i}_h`).value=r.how;});
+  if(ex.design) ex.design.forEach((d,i)=>{$(`d_${i}_a`).value=d[0]; $(`d_${i}_b`).value=d[1];});
+  if(ex.rounds){dyn.rounds=ex.rounds.map(r=>({...r})); renderRows('rounds');}
+  if(ex.exceptions){dyn.exceptions=ex.exceptions.map(r=>({...r})); renderRows('exceptions');}
+  if(ex.improvements){dyn.improvements=ex.improvements.map(r=>({...r})); renderRows('improvements');}
+  if(ex.after) Object.entries(ex.after).forEach(([id,val])=>{const el=$(id); if(el) el.value=val;});
+  exampleValues={}; Object.entries(ex.fields).forEach(([id,val])=>{ if($(id)) exampleValues[id]=val; }); if(ex.after) Object.entries(ex.after).forEach(([id,val])=>{ if($(id)) exampleValues[id]=val; });
+  exampleLoaded=true; markUnset(); render();
+}
+const RECS={"05": {"title": "05 \u00b7 Production evidence", "hint": "What does the live process already show? Observation, not assessment: no criterion, no verdict. One row per period.", "cols": ["round_id", "period", "decisions_reviewed", "overturn_rate", "appeals_received", "appeals_upheld", "source_system", "linked_decisions", "interpretation"], "ph": {"round_id": "Round id", "period": "Period, e.g. 2026-Q3", "decisions_reviewed": "Decisions reviewed in the period", "overturn_rate": "Overturn rate, as reported", "appeals_received": "Appeals received", "appeals_upheld": "Appeals upheld (a wrong output the review did not catch)", "source_system": "Where the figures come from", "linked_decisions": "Whether upheld appeals can be traced to decisions; do not link to individuals without consultation", "interpretation": "What this row means, read alongside the assessments"}}, "01": {"title": "01 \u00b7 Competence matrix", "hint": "Can each reviewer do what the role requires? One row per reviewer per required skill.", "cols": ["round_id", "reviewer_id", "required_skill", "required_level", "assessment_method", "assessed_by", "assessor_independence", "assessment_date", "criterion", "criterion_set_date", "result", "result_detail", "met", "conditions", "next_due_date", "remediation", "interim_restriction", "authority_to_halt", "interpretation", "evidence_location", "record_status"], "ph": {"round_id": "Round id", "reviewer_id": "Pseudonymous id, never a name", "required_skill": "Stated as something a person does, e.g. detects an inconsistent statistical argument", "required_level": "Your own scale, defined before use", "assessment_method": "What was actually done", "assessed_by": "Who conducted it and which line they sit in", "assessor_independence": "Independent of the person and the queue? First line assessing itself is a weakness to state", "assessment_date": "Date", "criterion": "What counted as meeting the requirement", "criterion_set_date": "When the criterion was fixed; must be earlier than the assessment date", "result": "The raw result, whether or not it met the criterion", "result_detail": "Which items were missed, any pattern", "met": "Yes, no, or not determined", "conditions": "Time of day, concurrent load, whether the reviewer knew", "next_due_date": "When assessed again; a failed result shortens the interval", "remediation": "What follows where not met; if nothing, say so", "interim_restriction": "What the person may do while remediation is open", "authority_to_halt": "Can this person stop the process, and on what authority", "interpretation": "What this row means", "evidence_location": "Where the record lives", "record_status": "Record-keeping state of the row, e.g. Current, Superseded; not a verdict"}}, "02": {"title": "02 \u00b7 Time on task", "hint": "Under what conditions were they working? One row per reviewer per period.", "cols": ["round_id", "reviewer_id", "period", "source_system", "items_reviewed", "hours_total", "longest_continuous_stretch", "break_pattern", "concurrent_scenarios", "task_difficulty_note", "interpretation", "notes"], "ph": {"round_id": "Round id", "reviewer_id": "Pseudonymous id", "period": "e.g. 2026-W29", "source_system": "e.g. workforce management export", "items_reviewed": "Count", "hours_total": "Hours in the period", "longest_continuous_stretch": "e.g. 1h 30m", "break_pattern": "e.g. 15 min per 90 min", "concurrent_scenarios": "Number of scenarios overseen at once", "task_difficulty_note": "Routine or not, and why", "interpretation": "What this means for reading an assessment from the same period", "notes": ""}}, "03": {"title": "03 \u00b7 Oversight stress test", "hint": "Do they catch errors that are deliberately planted? One row per test, not per reviewer. Seeded errors are deception: synthetic or sandboxed cases, debrief, and design review by whoever reviews research on employees.", "cols": ["round_id", "test_id", "date", "population_tested", "population_description", "items_presented", "flawed_items", "flawed_items_accepted", "system_confidence", "detection_distribution", "override_distribution", "noticed_not_acted", "reviewers_informed", "ethics_review", "assessed_by", "conditions", "contamination_check", "interpretation", "notes"], "ph": {"round_id": "Round id", "test_id": "Test id", "date": "Date", "population_tested": "Count", "population_description": "Who, by role; no names", "items_presented": "Count", "flawed_items": "Count", "flawed_items_accepted": "Count accepted without challenge", "system_confidence": "How confidence was presented on flawed items", "detection_distribution": "Across reviewers, e.g. median 82%, range 55-95%", "override_distribution": "Across reviewers, separate from detection", "noticed_not_acted": "Noticed and let through; carries more weight against the individual", "reviewers_informed": "Were reviewers told the protocol was running", "ethics_review": "What review the design received, with reference", "assessed_by": "Who ran and scored it", "conditions": "Sandboxed queue, volume, time of day", "contamination_check": "Did reviewers detect the seeding; how checked", "interpretation": "What the distribution appears to show and what would change the reading", "notes": ""}}, "04": {"title": "04 \u00b7 Skill preservation", "hint": "Can they still do it without the system? One row per reviewer per exercise.", "cols": ["round_id", "reviewer_id", "exercise_date", "exercise_type", "assessed_by", "conditions", "system_available", "performance", "comparison_to_assisted", "interval_since_last", "interpretation", "notes"], "ph": {"round_id": "Round id", "reviewer_id": "Pseudonymous id", "exercise_date": "Date", "exercise_type": "e.g. degraded-mode exercise, outputs withheld", "assessed_by": "Who ran it", "conditions": "Scheduled or embedded; same case set or not", "system_available": "Yes or no", "performance": "Raw result without the system", "comparison_to_assisted": "Same reviewer with the system, same or matched set", "interval_since_last": "Time since the last exercise, or none", "interpretation": "Single observation or a trend", "notes": ""}}};
+const REC_ORDER=["05", "01", "02", "03", "04"];
+const REC_EXAMPLES={"01": [{"round_id": "2026-R1", "reviewer_id": "CR-01", "required_skill": "Identifies an application where the reason codes do not support the recommended decline", "required_level": "Expert", "assessment_method": "Seeded error detection, 20 synthetic applications (individual assessment; separate from the roster-wide stress test of 2026-08-01)", "assessed_by": "Team lead, first line", "assessor_independence": "No \u2014 same team", "assessment_date": "2026-07-15", "criterion": "17/20 or better with no miss in the first ten cases", "criterion_set_date": "2026-07-01", "result": "17/20", "result_detail": "3 missed, all in the last ten cases", "met": "Yes", "conditions": "End of shift, sandboxed copy of the live queue, reviewer not informed", "next_due_date": "2026-10-15", "remediation": "None", "interim_restriction": "None", "authority_to_halt": "May overturn a decline without escalation", "interpretation": "Met the criterion, but all three misses fell in the last ten cases and the session ran at end of shift. The criterion does not test for that pattern; consider one that does.", "evidence_location": "GRC record store", "record_status": "Current"}, {"round_id": "2026-R1", "reviewer_id": "CR-02", "required_skill": "Identifies an application where the model's score conflicts with documented income and obligations", "required_level": "Expert", "assessment_method": "Seeded error detection, 15 synthetic applications (individual assessment; separate from the roster-wide stress test of 2026-08-01)", "assessed_by": "Team lead, first line", "assessor_independence": "No \u2014 same team", "assessment_date": "2026-07-10", "criterion": "12/15 or better; any miss on an unsupported decline to be discussed", "criterion_set_date": "2026-07-01", "result": "12/15", "result_detail": "2 missed, one of them an unsupported decline; 1 recorded as uncertain", "met": "Not determined", "conditions": "Scheduled session, no concurrent load, reviewer informed", "next_due_date": "2026-10-10", "remediation": "Miss on an unsupported decline discussed with the analyst 2026-07-14; repeat under operating conditions before next cycle", "interim_restriction": "None", "authority_to_halt": "May overturn a decline without escalation", "interpretation": "Result meets the stated threshold, but the session had no concurrent load and the analyst was informed, so it does not support an inference to operation.", "evidence_location": "GRC record store", "record_status": "Follow-up open"}, {"round_id": "2026-R1", "reviewer_id": "CR-03", "required_skill": "Explains, without reference material, what the model uses to reach a score and what would change it", "required_level": "Working", "assessment_method": "Unassisted comprehension assessment, 8 scenarios", "assessed_by": "Model risk, second line", "assessor_independence": "Yes", "assessment_date": "2026-07-18", "criterion": "Explains mechanism correctly in 6 of 8 scenarios", "criterion_set_date": "2026-07-02", "result": "5/8", "result_detail": "Both failures on applications with thin credit files", "met": "No", "conditions": "Scheduled, no reference material, reviewer informed", "next_due_date": "2026-09-18", "remediation": "Targeted briefing on thin-file scoring; reassess by 2026-09-18", "interim_restriction": "Overturns require second signature until reassessment", "authority_to_halt": "May overturn a decline, second signature required \u2014 see interim_restriction", "interpretation": "Did not meet the comprehension criterion. Both failures on applications with thin credit files.", "evidence_location": "GRC record store", "record_status": "Remediation open"}], "02": [{"round_id": "2026-R1", "reviewer_id": "CR-01", "period": "2026-W29", "source_system": "Workforce management export", "items_reviewed": "142", "hours_total": "28", "longest_continuous_stretch": "1h 30m", "break_pattern": "15 min per 90 min", "concurrent_scenarios": "2", "task_difficulty_note": "Routine declines, reason codes straightforward", "interpretation": "Within the pattern set for this queue \u2014 28 hours, breaks every 90 minutes.", "notes": ""}, {"round_id": "2026-R1", "reviewer_id": "CR-02", "period": "2026-W28", "source_system": "Workforce management export", "items_reviewed": "165", "hours_total": "32", "longest_continuous_stretch": "5h 00m", "break_pattern": "None recorded", "concurrent_scenarios": "4", "task_difficulty_note": "Two applications required manual reconstruction of income from six months of statements", "interpretation": "32 hours with a five-hour unbroken stretch and four concurrent scenarios. Any assessment result from this week should be read with that in view.", "notes": "Thin-file applications over-represented this week"}], "03": [{"round_id": "2026-R1", "test_id": "ILLUSTRATIVE", "date": "2026-08-01", "population_tested": "12", "population_description": "Full credit review roster, 12 analysts, all shifts \u2014 reviewing automated declines before issue", "items_presented": "240", "flawed_items": "60", "flawed_items_accepted": "11", "system_confidence": "All flawed cases drawn from the high-confidence band (score above 0.85), where the model recommends decline without qualification", "detection_distribution": "Median 82%, range 55-95%", "override_distribution": "Median 78%, range 50-95%", "noticed_not_acted": "3 of 60: flagged doubt in the comment field and upheld the decline", "reviewers_informed": "Yes \u2014 told the model's recommendations are occasionally unsupported and to verify against the application file", "ethics_review": "Design reviewed [ref]; works council notified [date]", "assessed_by": "Model risk, second line", "conditions": "Sandboxed queue mirroring live volume, synthetic applications only; 20 per analyst against a normal weekly volume of roughly 200, a seed rate near 10%", "contamination_check": "Post-exercise interview with 4 of 12; two reported suspecting synthetic files in week two", "interpretation": "Detection median 82%, override median 78%. In this scenario detecting an unsupported decline and overturning it are the same act, so the two distributions differ only by the analysts who noticed and upheld anyway \u2014 three of sixty. Two analysts reported suspecting synthetic files, so results from the second week should be read with that in view. First round, so both spreads are baselines.", "notes": "Comment field used in 9 of 60 flawed cases. First roster-wide round; two analysts had been assessed individually in July"}], "04": [{"round_id": "2026-R1", "reviewer_id": "CR-01", "exercise_date": "2026-08-12", "exercise_type": "Degraded-mode exercise \u2014 applications presented with the model score and reason codes withheld", "assessed_by": "Model risk, second line", "conditions": "Scheduled session, both halves in one sitting, analyst informed", "system_available": "No", "performance": "14/20", "comparison_to_assisted": "16/20 with the score shown, same case set, same sitting", "interval_since_last": "None \u2014 first exercise", "interpretation": "14/20 without the model against 16/20 with it on the same applications, both halves obtained in the same session, so the comparison is not confounded by conditions. Single observation with no prior measurement, so it establishes a starting point and shows no trend.", "notes": ""}], "05": [{"round_id": "2026-R1", "period": "2026-Q3", "decisions_reviewed": "2410", "overturn_rate": "6.2%", "appeals_received": "84", "appeals_upheld": "19", "source_system": "Case management system, standard reporting", "linked_decisions": "Traceable in the case system; not linked to competence records \u2014 would require a separate data protection assessment and works council consultation before use", "interpretation": "Nineteen upheld appeals are declines the review did not catch. This is observed rather than assessed \u2014 no criterion, no verdict \u2014 and it costs nothing to collect."}]};
+
+let recRows={}; let recRegister=null; // {hash,round,crit,critdate,file}
+function buildRecForm(){
+  let h=`<p class="hint">${DOCS.rec.intro}</p>`;
+  h+=`<div class="consult"><div class="check"><input type="checkbox" id="h_consult" class="big" data-reg><span><b>Consultation comes first.</b><p class="hint">${CONSULT} Tick to confirm consultation has taken place or is not required for this engagement.</p></span></div></div>`;
+  h+=`<fieldset><legend>About this round</legend><label>Round id (copied onto every row)</label><input type="text" id="h_round" placeholder="e.g. 2026-R1" data-reg>
+      <div style="margin-top:8px"><button type="button" class="addrow" onclick="pendingVerify={kind:'recreg'}; $('verifyfile').click()">Open the register record for this round</button> <span class="chk" id="chk_recreg"></span></div>
+      <p class="hint">Opening the register record copies its round id, criterion and criterion date onto new competence-matrix rows and ties these records to the registration check code.</p>
+      <p><button type="button" class="addrow" onclick="loadExample()">Load the worked example</button> <span class="hint" style="display:inline">Illustrative rows from the templates. Replace before use.</span></p></fieldset>`;
+  REC_ORDER.forEach(id=>{const R=RECS[id];
+    h+=`<fieldset data-rec="${id}"><legend>${R.title}</legend><p class="hint">${R.hint}</p>
+      <div class="rec-rows" id="rec_${id}"></div>
+      <button class="addrow" type="button" onclick="recAdd('${id}')">Add row</button>
+      <button class="addrow" type="button" onclick="pendingVerify={kind:'reccsv',rec:'${id}'}; $('csvfile').click()">Open a CSV into this record</button>
+      <button class="addrow" type="button" onclick="downloadRecCsv('${id}')">Download this record as CSV</button></fieldset>`;
+  });
+  $('form').innerHTML=h;
+  recRows={}; REC_ORDER.forEach(id=>recRows[id]=[]); recRegister=null;
+  REC_ORDER.forEach(renderRecRows);
+  $('form').querySelectorAll('#h_consult,#h_round').forEach(el=>el.addEventListener('input',render));
+}
+function recAdd(id,vals){ const row={}; RECS[id].cols.forEach(c=>row[c]=(vals&&vals[c])||''); if(!row.round_id) row.round_id=v('h_round'); if(id==='01'&&recRegister&&!vals){ row.criterion=recRegister.crit||''; row.criterion_set_date=recRegister.critdate||''; } recRows[id].push(row); renderRecRows(id); render(); }
+function recDel(id,i){ recRows[id].splice(i,1); renderRecRows(id); render(); }
+function renderRecRows(id){
+  const host=$('rec_'+id); if(!host) return; const R=RECS[id];
+  host.innerHTML=recRows[id].map((row,i)=>`<div class="row"><div class="rowhead"><span>Row ${i+1}</span><button class="addrow" type="button" onclick="recDel('${id}',${i})">Remove</button></div><div class="grid">${R.cols.map(c=>`<div><label>${c}</label>${c==='record_status'?`<select data-rec="${id}" data-i="${i}" data-k="${c}"><option value="">choose</option><option${row[c]==='Current'?' selected':''}>Current</option><option${row[c]==='Superseded'?' selected':''}>Superseded</option></select>`:(c==='met'?`<select data-rec="${id}" data-i="${i}" data-k="${c}"><option value="">choose</option>${['Yes','No','Not determined'].map(o=>`<option${row[c]===o?' selected':''}>${o}</option>`).join('')}</select>`:`<input type="text" data-rec="${id}" data-i="${i}" data-k="${c}" value="${esc(row[c]||'')}" placeholder="${esc(R.ph[c]||'')}">`)}</div>`).join('')}</div></div>`).join('')||'<p class="hint">No rows yet.</p>';
+  host.querySelectorAll('input,select').forEach(el=>el.addEventListener('input',e=>{recRows[e.target.dataset.rec][+e.target.dataset.i][e.target.dataset.k]=e.target.value; render();}));
+}
+function renderRec(today){
+  const round=v('h_round'); let h=`<h2>Records of the round ${esc(round)}</h2>
+  <p class="meta">Consultation with the persons assessed: <b>${$('h_consult')&&$('h_consult').checked?'confirmed':'<span class="ns">not confirmed</span>'}</b> · ${recRegister?'Register check code <span class="hash">'+esc(recRegister.hash)+'</span> ('+esc(recRegister.file)+')':'<span class="ns">No register record opened</span>'} · Printed ${today}</p>
+  <p class="stand">Rows as they will appear in the template CSVs. Nothing on this page is computed. Reviewers appear by pseudonymous id only. Completed records must not be committed to any public repository.</p>`;
+  REC_ORDER.forEach(id=>{const R=RECS[id]; const rows=recRows[id]||[];
+    h+=`<h3>${R.title} · ${rows.length} row${rows.length===1?'':'s'}</h3>`;
+    if(rows.length) h+=`<div class="recwrap"><table class="rec"><tr>${R.cols.map(c=>`<th>${c}</th>`).join('')}</tr>${rows.map(r=>`<tr>${R.cols.map(c=>`<td>${esc(r[c]||'')}</td>`).join('')}</tr>`).join('')}</table></div>`;
+    else h+=`<p class="ns">No rows.</p>`;
+  });
+  return h+foot("Field definitions are in templates/README.md of the repository. Record 03 is a study on staff: synthetic or sandboxed cases, debrief, and design review. Record 05 is observation, not assessment.");
+}
+function csvEscape(x){ x=String(x==null?'':x); return /[",\n\r]/.test(x)?'"'+x.replace(/"/g,'""')+'"':x; }
+function recCsv(id){ const R=RECS[id]; return [R.cols.join(',')].concat((recRows[id]||[]).map(r=>R.cols.map(c=>csvEscape(r[c])).join(','))).join('\r\n')+'\r\n'; }
+const REC_FILES={'01':'01-competence-matrix.csv','02':'02-time-on-task.csv','03':'03-oversight-stress-test.csv','04':'04-skill-preservation.csv','05':'05-production-evidence.csv'};
+function downloadRecCsv(id){ dl(REC_FILES[id], new Blob(['﻿'+recCsv(id)],{type:'text/csv'})); }
+function parseCsv(text){ const rows=[]; let row=[], field='', q=false; text=text.replace(/^﻿/,'');
+  for(let i=0;i<text.length;i++){ const ch=text[i];
+    if(q){ if(ch==='"'){ if(text[i+1]==='"'){field+='"';i++;} else q=false; } else field+=ch; }
+    else if(ch==='"') q=true; else if(ch===','){row.push(field);field='';} else if(ch==='\n'||ch==='\r'){ if(ch==='\r'&&text[i+1]==='\n') i++; row.push(field); rows.push(row); row=[]; field=''; } else field+=ch; }
+  if(field.length||row.length){ row.push(field); rows.push(row); }
+  return rows.filter(r=>r.length>1||(r.length===1&&r[0]!==''));
+}
+async function csvLoad(ev){
+  const file=ev.target.files[0]; ev.target.value=''; if(!file||!pendingVerify||pendingVerify.kind!=='reccsv') return;
+  const id=pendingVerify.rec; pendingVerify=null; const R=RECS[id];
+  try{ const rows=parseCsv(await file.text()); const hdr=rows[0].map(x=>x.trim()); const missing=R.cols.filter(c=>!hdr.includes(c)&&!(c==='record_status'&&hdr.includes('status')));
+    if(missing.length){ alert(`This file does not match ${R.title}. Missing columns: ${missing.join(', ')}`); return; }
+    const idx=c=>{let i=hdr.indexOf(c); if(i<0&&c==='record_status') i=hdr.indexOf('status'); return i;};
+    let n=0; rows.slice(1).forEach(r=>{ const o={}; R.cols.forEach(c=>{const i=idx(c); o[c]=i>=0?(r[i]||''):'';}); recRows[id].push(o); n++; });
+    renderRecRows(id); render(); const nm=rows.slice(1).filter(r=>{const i=idx('reviewer_id'); return i>=0&&looksLikeName(r[i]);}).length; alert(`${n} row${n===1?'':'s'} added to ${R.title} from ${file.name}.`+(nm?`\n\n${nm} reviewer_id value${nm===1?' looks':'s look'} like a personal name. The format asks for pseudonymous ids.`:''));
+  }catch(e){ alert('Could not read that CSV.'); }
+}
+function recXlsxSheets(){
+  const sheets=REC_ORDER.map(id=>{const R=RECS[id]; return {name:R.title.replace(' · ',' '),rows:[R.cols,...(recRows[id]||[]).map(r=>R.cols.map(c=>r[c]||''))],widths:R.cols.map(()=>22)};});
+  const rec=[['Item','Value'],['Document','Records of the round'],['Round id',v('h_round')||'not stated'],['Consultation',$('h_consult')&&$('h_consult').checked?'confirmed':'not confirmed'],['Register check code',recRegister?recRegister.hash:'no register record opened'],['Register record file',recRegister?recRegister.file:''],['Printed',new Date().toISOString().slice(0,10)],['Builder version',BUILDER_VERSION],['Format licence','CC BY 4.0, supervisory-capacity-assessment repository (dturkina99). The content of this workbook is the preparing organisation\'s own.'],['Note','Headers match the template CSVs. Nothing computed. Reviewers by pseudonymous id only. Do not commit completed records to a public repository.']];
+  sheets.push({name:'Record',rows:rec,widths:[22,90]}); return sheets;
+}
+/* ---------- check against record file ---------- */
+function checkNote(key){const c=checks[key]; if(!c) return ''; return ` (checked: <b>${c.ok?'matches the file provided':'does not match the file provided'}</b>, ${esc(c.file)})`;}
+function checkCell(kind,i){const c=checks[kind+'_'+i]; if(!c) return '<span class="ns">not checked</span>'; return `${c.ok?'matches the file provided':'<b>does not match the file provided</b>'}${c.retro?' · retrospective':''} · ${esc(c.file)}`;}
+function checkText(kind,i){const c=checks[kind+'_'+i]; if(!c) return 'not checked'; return (c.ok?'matches the file provided':'does not match the file provided')+(c.retro?' · retrospective':'')+' · '+c.file;}
+function verifyField(target){pendingVerify={kind:'field',target}; $('verifyfile').click();}
+function verifyRow(i){pendingVerify={kind:'rounds',i}; $('verifyfile').click();}
+async function verifyLoad(ev){
+  const file=ev.target.files[0]; ev.target.value=''; if(!file||!pendingVerify) return;
+  try{
+    const o=JSON.parse(await file.text());
+    let h, internal;
+    if(o.registered){ h=await sha256(canonical({fields:o.registered.fields,tables:o.registered.tables})); internal=(h===o.registered.hash); }
+    else if(o.retrospective&&o.current){ h=await sha256(canonical(o.current)); internal=(h===o.checkcode); }
+    else throw new Error('That record has no registered snapshot; open the record saved after the round.');
+    let pasted, key;
+    if(pendingVerify.kind==='recreg'){ const rf=(o.registered||o.current).fields; recRegister={hash:h,file:file.name,round:rf.h_round||'',crit:rf.f_crit||'',critdate:rf.f_critdate||'',retro:!!o.retrospective}; if(rf.h_round) $('h_round').value=rf.h_round; $('chk_recreg').innerHTML=`${esc(file.name)}: <b>${internal?'opened':'fails its own check code'}</b>${o.retrospective?' · retrospective':''}`; pendingVerify=null; render(); return; }
+    if(pendingVerify.kind==='field'){ key=pendingVerify.target; const el=$(key); pasted=(el.value||'').trim(); if(!pasted){el.value=h; pasted=h;} }
+    else { key='rounds_'+pendingVerify.i; const row=dyn.rounds[pendingVerify.i]; pasted=(row.fp||'').trim(); if(!pasted){row.fp=h; pasted=h;} const rf=(o.registered||o.current).fields; if(!row.id&&rf.h_round) row.id=rf.h_round; if(!row.date&&rf.f_rundate) row.date=rf.f_rundate;
+      const st=(o.after&&o.after.f_status)||''; if(st){ const sep=(rf.f_sepabsent||'').trim().toLowerCase(); const sepAbsent=sep&&!/^(none|none\.|n\/a|no)$/.test(sep); const reason= o.retrospective?' (retrospective)':(st==='recorded'&&sepAbsent?' (separation absent)':''); const res=(o.after&&o.after.f_result)||''; if(!row.result) row.result=(res?res+', ':'')+st+reason; }
+      renderRows('rounds'); }
+    checks[key]={file:file.name,ok:internal&&pasted===h,internal,retro:!!o.retrospective};
+    const msg= !internal ? 'record file fails its own check code (edited after registration)' : (pasted===h?'matches the file provided':'does not match the file provided');
+    const span=$('chk_'+(pendingVerify.kind==='field'?pendingVerify.target:'rounds_'+pendingVerify.i)); if(span) span.innerHTML=`${esc(file.name)}: <b>${msg}</b>`;
+    render();
+  }catch(e){ alert(e.message||'Could not read that file.'); }
+  pendingVerify=null;
+}
+/* ---------- leaving guard ---------- */
+function isDirty(){ if(!docId) return false; const snap=collectRegistered(); const vals=Object.values(snap.fields).filter(x=>x&&x!=='no'); const dynAny=dyn.rounds.length||dyn.exceptions.length||dyn.improvements.length||(docId==='rec'&&Object.values(recRows).some(r=>r.length)); const afterAny=Array.from(document.querySelectorAll('[data-after]')).some(el=>(el.value||'').trim()); return vals.length>0||dynAny||afterAny; }
+window.addEventListener('beforeunload',e=>{ if(isDirty()){ e.preventDefault(); e.returnValue=''; } });
+/* ---------- exports ---------- */
+function toMd(){
+  const tmp=document.createElement('div'); tmp.innerHTML=docBody(); let out='';
+  tmp.childNodes.forEach(n=>{ if(n.nodeType!==1) return; const t=n.tagName;
+    if(t==='DIV'&&n.classList.contains('titlerow')){ out+=`# ${n.querySelector('h2').textContent}\n\nStatus: ${n.querySelector('.status').textContent}\n\n`; return; }
+    if(t==='TABLE'&&(n.classList.contains('idblock')||n.classList.contains('kv'))){ out+=Array.from(n.querySelectorAll('tr')).map(tr=>`${tr.children[0].textContent.trim()}: ${tr.children[1].textContent.replace(/\s*Copy\s*$/,'').trim()}`).join('  \n')+'\n\n'; return; }
+    if(t==='H2') out+=`# ${n.textContent}\n\n`; else if(t==='H3') out+=`## ${n.textContent}\n`;
+    else if(t==='P'){ const c=n.cloneNode(true); c.querySelectorAll('br').forEach(b=>b.replaceWith('\n')); out+=`${c.textContent.trim()}\n\n`; } else if(t==='DIV') out+=`> ${n.textContent.trim().replace(/\s+/g,' ')}\n\n`;
+    else if(t==='TABLE'){ const rows=Array.from(n.querySelectorAll('tr')).map(tr=>Array.from(tr.children).map(td=>td.textContent.trim().replace(/\|/g,'/'))); const hasHead=n.querySelector('th'); const head=hasHead?rows[0]:rows[0].map(()=>''); const body=hasHead?rows.slice(1):rows; out+=`| ${head.join(' | ')} |\n|${head.map(()=>'---').join('|')}|\n`+body.map(r=>`| ${r.join(' | ')} |`).join('\n')+'\n\n'; } });
+  return out;
+}
+function docBody(){const c=$('doc').querySelector('table.pw>tbody>tr>td'); return c?c.innerHTML:$('doc').innerHTML;}
+const PAGE_TITLE=document.title;
+function printTitle(){ try{ document.title=stem(); }catch(e){} }
+window.addEventListener('beforeprint',printTitle);
+window.addEventListener('afterprint',()=>{document.title=PAGE_TITLE;});
+function dl(name,blob){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+function stem(){const f=((phase()==='after'&&registered)?registered:collectRegistered()).fields; const base=f.h_ref||f.h_round||f.h_ctrl||f.f_subject||docId; if(docId==='rec') return (base.toLowerCase().replace(/[^a-z0-9]+/g,'-')||'round')+'-records'; return (base.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||docId)+'-'+docId+(phase()==='single'?'':(retro?'-retrospective':'-'+phase()));}
+function downloadMd(){dl(stem()+'.md',new Blob([toMd()],{type:'text/markdown'}));}
+/* ---------- Excel export: minimal xlsx writer, no dependencies ---------- */
+const CRC_T=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return t;})();
+function crc32(u8){let c=0xFFFFFFFF;for(let i=0;i<u8.length;i++)c=CRC_T[(c^u8[i])&0xFF]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+function zipStore(files){ // files: [{name, data:Uint8Array}]
+  const enc=new TextEncoder(); const parts=[]; const cd=[]; let off=0;
+  const u16=n=>[n&255,(n>>8)&255], u32=n=>[n&255,(n>>8)&255,(n>>16)&255,(n>>>24)&255];
+  files.forEach(f=>{const name=enc.encode(f.name),crc=crc32(f.data),sz=f.data.length;
+    const lh=new Uint8Array([0x50,0x4b,3,4,20,0,0,0,0,0,0,0,0,0,...u32(crc),...u32(sz),...u32(sz),...u16(name.length),0,0,...name]);
+    parts.push(lh,f.data);
+    cd.push(new Uint8Array([0x50,0x4b,1,2,20,0,20,0,0,0,0,0,0,0,0,0,...u32(crc),...u32(sz),...u32(sz),...u16(name.length),0,0,0,0,0,0,0,0,0,0,0,0,...u32(off),...name]));
+    off+=lh.length+sz;});
+  const cdStart=off; let cdLen=0; cd.forEach(c=>{parts.push(c);cdLen+=c.length;});
+  parts.push(new Uint8Array([0x50,0x4b,5,6,0,0,0,0,...u16(files.length),...u16(files.length),...u32(cdLen),...u32(cdStart),0,0]));
+  let total=0; parts.forEach(p=>total+=p.length); const out=new Uint8Array(total); let pos=0; parts.forEach(p=>{out.set(p,pos);pos+=p.length;}); return out;
+}
+const xe=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,'');
+function colName(n){let s='';n++;while(n>0){const m=(n-1)%26;s=String.fromCharCode(65+m)+s;n=Math.floor((n-1)/26);}return s;}
+function sheetXml(rows,widths,headerIdx=0){ // rows: array of arrays of strings; first row bold
+  const cols=widths?`<cols>${widths.map((w,i)=>`<col min="${i+1}" max="${i+1}" width="${w}" customWidth="1"/>`).join('')}</cols>`:'';
+  const body=rows.map((r,ri)=>`<row r="${ri+1}">${r.map((c,ci)=>`<c r="${colName(ci)}${ri+1}" t="inlineStr"${ri===headerIdx?' s="1"':' s="2"'}><is><t xml:space="preserve">${xe(c)}</t></is></c>`).join('')}</row>`).join('');
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"><pane ySplit="${headerIdx+1}" topLeftCell="A${headerIdx+2}" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>${cols}<sheetData>${body}</sheetData></worksheet>`;
+}
+function buildXlsx(sheets){ // sheets: [{name, rows, widths}]
+  const enc=s=>new TextEncoder().encode(s);
+  const files=[];
+  files.push({name:'[Content_Types].xml',data:enc(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>${sheets.map((s,i)=>`<Override PartName="/xl/worksheets/sheet${i+1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')}</Types>`)});
+  files.push({name:'_rels/.rels',data:enc(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`)});
+  files.push({name:'xl/workbook.xml',data:enc(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${sheets.map((s,i)=>`<sheet name="${xe(s.name.slice(0,31))}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join('')}</sheets></workbook>`)});
+  files.push({name:'xl/_rels/workbook.xml.rels',data:enc(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${sheets.map((s,i)=>`<Relationship Id="rId${i+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i+1}.xml"/>`).join('')}<Relationship Id="rId${sheets.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`)});
+  files.push({name:'xl/styles.xml',data:enc(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts><fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellXfs count="3"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" applyFont="1"/><xf numFmtId="0" fontId="0" fillId="0" borderId="0" applyAlignment="1"><alignment wrapText="1" vertical="top"/></xf></cellXfs></styleSheet>`)});
+  sheets.forEach((s,i)=>files.push({name:`xl/worksheets/sheet${i+1}.xml`,data:enc(sheetXml(s.rows,s.widths,s.headerIdx||0))}));
+  return new Blob([zipStore(files)],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+}
+function downloadXlsx(){
+  if(docId==='rec'){ dl((v('h_round')||'round').toLowerCase().replace(/[^a-z0-9]+/g,'-')+'-records.xlsx', buildXlsx(recXlsxSheets())); return; }
+  const D=DOCS[docId]; const after=phase()==='after'; const snap=after?registered:collectRegistered(); const g=id=>snap.fields[id]||'';
+  const labelOf={}; D.sections.forEach(sec=>(sec.inputs||[]).forEach(i=>labelOf[i.id]={sec:sec.legend,label:i.label||sec.legend.replace(/^\S+ · /,'')}));
+  labelOf.h_consult={sec:'Header',label:'Consultation confirmed'};
+  const fields=[['Roles, not names, appear in this workbook. It was generated by the document builder, version '+BUILDER_VERSION+', and computes no results.','','','',''],['Section','Field','Value','Amended value','Reason for amendment']];
+  D.sections.forEach(sec=>{
+    if(sec.after&&!after) return;
+    (sec.inputs||[]).forEach(i=>{const val=sec.after?v(i.id):g(i.id); const am=(sec.amend&&after)?{v:v(`a_${sec.key}_v`),r:v(`a_${sec.key}_r`)}:null;
+      fields.push([sec.legend,i.label||'',(val||'not stated').replace(/\s*\(requires an entry in section 8\)/,''),am&&am.v?am.v:'',am&&am.r?am.r:'']);});
+    if(sec.key==='h'&&D.consult) fields.push(['Header','Consultation confirmed',g('h_consult')==='yes'?'yes':'not confirmed','','']);
+  });
+  if(docId==='sft'&&!after) fields.push(['9 · Status','Status','Declared (completed after the work)','','']);
+  const sheets=[{name:'Fields',rows:fields,widths:[30,38,60,40,40],headerIdx:1}];
+  const T=snap.tables||{};
+  if(T.routes) sheets.push({name:'Routes',rows:[['Route','Answer','How'],...T.routes.map(r=>[r.route,r.answer==='notconsidered'?'not considered':r.answer==='none'?'none known':r.answer,r.how||''])],widths:[44,16,60]});
+  if(T.rounds) sheets.push({name:'Rounds',rows:[['Round','Date','Check code','Checked','Result as recorded'],...T.rounds.map((r,i)=>[r.id||'',r.date||'',r.fp||'',checkText('rounds',i),r.result||''])],widths:[14,14,68,40]});
+  if(T.design) sheets.push({name:'Control design',rows:[['Element','Design','Evidenced from','Adequate?','Basis'],...T.design.map((d,i)=>[d.element,DESIGN[i][1],d.evidenced||'',d.adequate||'not assessed',d.basis||''])],widths:[30,50,40,12,50]});
+  if(T.exceptions) sheets.push({name:'Exceptions',rows:[['Ref','Exception','Cause','Action','Owner (role)','Due'],...T.exceptions.map(x=>[x.ref||'',x.exc||'',x.cause||'',x.action||'',x.owner||'',x.due||''])],widths:[8,40,30,40,20,12]});
+  if(T.improvements) sheets.push({name:'Improvements',rows:[['Ref','Improvement','Design element','Owner (role)','Due'],...T.improvements.map(x=>[x.ref||'',x.imp||'',x.element||'',x.owner||'',x.due||''])],widths:[8,50,30,20,12]});
+  const rec=[['Item','Value'],['Document',D.title],['Phase',phase()],['Printed',new Date().toISOString().slice(0,10)],['Check code',after?registered.hash:(docId==='wp'?wpHash:'none (registration not yet frozen)')],['Check code is','A code computed from the registered text. If any registered field is changed, the code no longer matches. It shows the text was not altered after registration; it does not show when it was registered or whether it is true. SHA-256 of the registered fields and tables as saved in the record file (.json).'],['Builder version',BUILDER_VERSION],['Format licence','CC BY 4.0, supervisory-capacity-assessment repository (dturkina99). The content of this workbook is the preparing organisation\'s own.'],['Illustrative values',exampleLoaded?('still present in: '+exampleUntouched().map(exampleLabel).join('; ')):'none'],['Completeness',(docId==='sft'&&after)?sftCompleteness(id=>registered.fields[id]||'').text:'n/a'],['Rounds',(docId==='wp'&&dyn.rounds.length&&dyn.rounds.every((r,i)=>checks['rounds_'+i]&&checks['rounds_'+i].retro))?'No round in this sequence was registered before it ran.':'n/a'],['Completed',retro?'after the round, retrospectively':(docId==='reg'?'before the round':'n/a')],['Format','supervisory-capacity-assessment repository (dturkina99), CC BY 4.0'],['Note','Roles, not names. This workbook was generated by the browser page and computes nothing.']];
+  sheets.push({name:'Record',rows:rec,widths:[18,90]});
+  dl(stem()+'.xlsx',buildXlsx(sheets));
+}
+
+function downloadDoc(){const html=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><style>body{font-family:Georgia,serif;font-size:11pt} table{border-collapse:collapse} td,th{border:1px solid #999;padding:4px 6px;vertical-align:top} h2{font-size:16pt;font-weight:normal} h3{font-size:11pt} table.idblock td,table.kv td{border:0;padding:2px 8px 2px 0} table.idblock td:first-child,table.kv td:first-child{color:#555;width:120pt} .status{font-size:8pt;letter-spacing:1.5pt;text-transform:uppercase;border:1px solid #111;padding:1pt 5pt} .ns{color:#555;font-style:italic} .foot,.meta{font-size:9pt;color:#555} .hash{font-family:Consolas,monospace;font-size:8pt} .amd{border-left:3px solid #111;padding-left:6px} .warn{border:1px solid #111;padding:3px 6px}</style></head><body>${docBody().replace(/<button[^>]*>[\s\S]*?<\/button>/g,'')}</body></html>`; dl(stem()+'.doc',new Blob(['﻿',html],{type:'application/msword'}));}
+function saveJson(){
+  if(docId==='reg'&&(phase()==='after'||retro)&&v('f_result')&&!/\d/.test(v('f_result'))){ if(!confirm(`The result has no number: '${v('f_result')}'. It cannot be read against the criterion. Save anyway?`)) return; }
+  const o={format:'supervisory-capacity-builder',version:3,doc:docId,phase:phase(),current:collectRegistered(),registered:registered,amendments:{},after:{}};
+  document.querySelectorAll('[data-after]').forEach(el=>o.after[el.id]=(el.value||'').trim());
+  document.querySelectorAll('.amend').forEach(d=>{const k=d.dataset.for,val=v(`a_${k}_v`),r=v(`a_${k}_r`); if(val||r) o.amendments[k]={value:val,reason:r};});
+  if(docId==='wp'||retro) o.checkcode=wpHash; o.checks=checks; o.builder=BUILDER_VERSION; o.retrospective=retro;
+  if(docId==='rec'){ o.records=recRows; o.register=recRegister; }
+  dl(stem()+'-record.json',new Blob([JSON.stringify(o,null,2)],{type:'application/json'}));
+}
+function applySnapshot(snap){
+  Object.entries(snap.fields).forEach(([id,val])=>{const el=$(id); if(!el) return; if(el.type==='checkbox') el.checked=(val==='yes'); else el.value=val;});
+  if(snap.tables.routes) snap.tables.routes.forEach((x,i)=>{$(`r_${i}_a`).value=x.answer==='notconsidered'?'':x.answer; $(`r_${i}_h`).value=x.how||'';});
+  if(snap.tables.design) snap.tables.design.forEach((x,i)=>{$(`d_${i}_e`).value=x.evidenced||''; $(`d_${i}_a`).value=x.adequate||''; $(`d_${i}_b`).value=x.basis||'';});
+  if(snap.tables.rounds){dyn.rounds=snap.tables.rounds.map(r=>({...r})); renderRows('rounds');}
+  if(snap.tables.exceptions){dyn.exceptions=snap.tables.exceptions.map(r=>({...r})); renderRows('exceptions');}
+  if(snap.tables.improvements){dyn.improvements=snap.tables.improvements.map(r=>({...r})); renderRows('improvements');}
+}
+function loadMsg(file,o){ const lm=$('loadmsg'); if(!lm) return; const f=(o.registered||o.current||{}).fields||{}; const filled=Object.values(f).filter(x=>x&&String(x).trim()).length; const ref=f.h_ref||f.h_round||f.h_ctrl||''; let t=`Opened ${file.name}: ${DOCS[o.doc].title}`; if(o.doc==='rec'){ const n=Object.values(o.records||{}).reduce((a,r)=>a+(r||[]).length,0); t+=`, ${n} record row${n===1?'':'s'}.`; } else if(!filled){ t+='. The file holds no entries: it was saved from an empty form.'; } else { t+=ref?`, ${ref}`:''; t+=o.registered?`, registered, check code ${o.registered.hash.slice(0,16)}…`:(o.retrospective?', retrospective':', not yet registered'); t+='.'; } lm.textContent=t; lm.style.display='block'; }
+async function loadJson(ev){
+  const file=ev.target.files[0]; if(!file) return; const text=await file.text(); ev.target.value='';
+  try{
+    const o=JSON.parse(text); if(!DOCS[o.doc]) throw 0;
+    openDoc(o.doc,true);
+    loadMsg(file,o);
+    if(o.doc==='rec'){ if(o.current&&o.current.fields){ $('h_round').value=o.current.fields.h_round||''; $('h_consult').checked=o.current.fields.h_consult==='yes'; } recRows=o.records||recRows; REC_ORDER.forEach(id=>{ if(!recRows[id]) recRows[id]=[]; renderRecRows(id); }); recRegister=o.register||null; if(recRegister) $('chk_recreg').innerHTML=`${esc(recRegister.file)}: <b>opened</b>`; render(); return; }
+    applySnapshot(o.registered||o.current); checks=o.checks||{};
+    if(o.doc==='reg'&&o.retrospective){ $('when_after').checked=true; setRetro(true); Object.entries(o.after||{}).forEach(([id,val])=>{const el=$(id); if(el) el.value=val;}); markUnset(); render(); return; }
+    if(o.registered){
+      const h=await sha256(canonical({fields:o.registered.fields,tables:o.registered.tables}));
+      if(h!==o.registered.hash) alert('Warning: the registered fields in this record do not match their check code. The file was edited after registration.');
+      registered=o.registered;
+      Object.entries(o.amendments||{}).forEach(([k,a])=>{$(`a_${k}_v`).value=a.value||'';$(`a_${k}_r`).value=a.reason||'';document.querySelector(`.amend[data-for="${k}"]`).classList.add('open');});
+      Object.entries(o.after||{}).forEach(([id,val])=>{const el=$(id); if(el) el.value=val;});
+      document.body.className='building phase-after'; $('btnBefore').classList.remove('on'); $('btnAfter').classList.add('on'); regInputs().forEach(el=>el.disabled=true);
+    }
+    markUnset(); render();
+  }catch(e){ alert('Could not read that file.'); }
+}
+async function clearAll(){ const id=docId; openDoc(id,true); }
+function routeFromHash(fromHistory){
+  const h=location.hash; const id=Object.keys(HASHES).find(k=>HASHES[k]===h);
+  if(id){ if(docId!==id){ if(fromHistory&&isDirty()&&!confirm('Leave this document? Unsaved entries will be lost.')){ history.pushState(null,'',HASHES[docId]); return; } openDoc(id,true,true); } }
+  else { if(docId!==null){ if(fromHistory&&isDirty()&&!confirm('Leave this document? Unsaved entries will be lost.')){ history.pushState(null,'',HASHES[docId]); return; } goStart(true); } }
+}
+window.addEventListener('popstate',()=>{ if(!suppressHash) routeFromHash(true); });
+window.addEventListener('DOMContentLoaded',()=>routeFromHash(false));
+function copyCode(code,btn){ const done=()=>{const t=btn.textContent; btn.textContent='Copied'; setTimeout(()=>btn.textContent=t,2000);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(code).then(done).catch(()=>fallbackCopy(code,done)); } else fallbackCopy(code,done); }
+function fallbackCopy(code,done){ const ta=document.createElement('textarea'); ta.value=code; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); done();}catch(e){} ta.remove(); }
+function togglePreview(){const p=$('preview'); p.classList.toggle('collapsed'); $('btnPrev').textContent=p.classList.contains('collapsed')?'Show document':'Hide document';}
+</script>
+</body>
+</html>

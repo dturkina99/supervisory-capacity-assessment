@@ -41,7 +41,7 @@ One row per reviewer per required skill. The core record.
 | `authority_to_halt` | Whether this person can stop the process they oversee, and on what authority. |
 | `interpretation` | What this row means, including any pattern in the result the criterion did not test for. |
 | `evidence_location` | Where the record lives. |
-| `status` | Record-keeping state of the row, not a verdict on the person. The verdict is `met`. |
+| `record_status` | Record-keeping state of the row (for example Current, Superseded), not a verdict on the person. The verdict is `met`. |
 
 Process-level context — the decision under oversight, what the system supplies, the consequence of a wrong output — is recorded once on the scorecard, not repeated on every row.
 

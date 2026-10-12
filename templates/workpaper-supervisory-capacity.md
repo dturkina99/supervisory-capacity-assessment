@@ -7,15 +7,24 @@ This workpaper carries the control description, the purpose limitation, the desi
 ---
 
 **Control reference:** [ ]
+**System under review:** [ ] — **Oversight task:** [ ] — **Reassessment interval as stated:** [ ]
 **Round:** [ ] — **Period:** [ ]
-**Prepared by:** [ ] — **Date:** [ ]
-**Reviewed by:** [ ] — **Date:** [ ]
+**Prepared by (role):** [ ] — **Date:** [ ]
+**Reviewed by (role):** [ ] — **Date:** [ ]
+**Consultation with the persons assessed:** confirmed / not confirmed
+
+| Document | Reference | Filed at |
+|---|---|---|
+| Round register | | |
+| Small function track declaration | | |
+| Scorecard for the round | | |
+| This workpaper | | |
 
 ---
 
 ## 1. Control description
 
-The competence of persons assigned to oversee the AI system is assessed before assignment and reassessed at a stated interval, on the same footing as their independence. Assessment covers the specific capabilities the oversight task requires, is performed under conditions resembling operation, and is recorded.
+For [system], the competence of persons assigned to [oversight task] is assessed before assignment and reassessed at [interval], on the same footing as their independence. Assessment covers the specific capabilities the oversight task requires, is performed under conditions resembling operation, and is recorded.
 
 ## 2. Risk addressed
 
@@ -37,15 +46,17 @@ Assessed independently of whether the control operated in the period.
 
 | Element | Design | Evidenced from | Adequate? |
 |---|---|---|---|
-| Competence specified | Required capabilities stated as observable performance, per system scope | Record 01, `required_skill` / `required_level` | |
-| Criterion set in advance | Criterion and the date it was fixed recorded before the round | Register; record 01 `criterion` / `criterion_set_date` | |
-| Independence of roles | Set builder, administrator and scorer separated; separations absent are named | Register; record 01 `assessor_independence` | |
-| Assessment at intake | Method stated; conditions recorded | Record 01, `assessment_method` / `conditions` | |
-| Reassessment | Interval stated; triggers stated (system change, scope change, new assignee) | Register; record 01 `next_due_date` | |
-| Conditions of work recorded | Hours, continuous stretches, breaks, concurrent load | Record 02 | |
-| Consequence of a failed assessment | Stated before the result: reassignment, remediation, or limitation on reliance | Register; record 01 `remediation` / `interim_restriction` | |
-| Authority to act | Reviewers can halt the process they oversee, on a stated authority | Record 01, `authority_to_halt` | |
-| Unassisted capability measured | Performance recorded with the system and without it, at a stated interval | Record 04 | |
+| Competence specified | Required capabilities stated as observable performance, per system scope | Record 01, competence matrix: `required_skill`, `required_level` | |
+| Criterion set in advance | Criterion and the date it was fixed recorded before the round | Register; record 01, competence matrix: `criterion`, `criterion_set_date` | |
+| Independence of roles | Set builder, administrator and scorer separated; separations absent are named | Register; record 01, competence matrix: `assessor_independence` | |
+| Assessment at intake | Method stated; conditions recorded | Record 01, competence matrix: `assessment_method`, `conditions` | |
+| Reassessment | Interval stated; triggers stated (system change, scope change, new assignee) | Register; record 01, competence matrix: `next_due_date` | |
+| Conditions of work recorded | Hours, continuous stretches, breaks, concurrent load | Record 02, time on task | |
+| Consequence of a failed assessment | Stated before the result: reassignment, remediation, or limitation on reliance | Register; record 01, competence matrix: `remediation`, `interim_restriction` | |
+| Authority to act | Reviewers can halt the process they oversee, on a stated authority | Record 01, competence matrix: `authority_to_halt` | |
+| Unassisted capability measured | Performance recorded with the system and without it, at a stated interval | Record 04, skill preservation | |
+
+Adequate? is answered Yes, Partly or No, with one line of basis per row.
 
 ## 5. Results
 
@@ -60,11 +71,19 @@ See the scorecard for round [ ]. Summarise here only what bears on the conclusio
 
 | | |
 |---|---|
-| Design | Effective / Deficient — basis: |
-| Operating effectiveness | Effective / Deficient / Not tested — basis: |
+| Design | Effective / Effective with improvements / Deficient — basis: |
+| Operating effectiveness | Effective / Effective with improvements / Deficient / Not tested — basis: |
 | Capabilities not covered by this test | |
+| Review | Agreed / Agreed with comments / Not agreed — comment: |
 
-A design conclusion can be reached on the register and the control design table alone. An operating effectiveness conclusion requires a round with a criterion fixed in advance and stated separations; where either is missing, the correct entry is Not tested.
+A design conclusion can be reached on the register and the control design table alone. An operating effectiveness conclusion requires a round with a criterion fixed in advance and stated separations; where either is missing, the correct entry is Not tested. A round that ran with both and fell short of the criterion is Deficient, not Not tested.
+
+## 8. Improvements
+
+Required where either conclusion is Effective with improvements. Each improvement names the design element it bears on. Owner is a role.
+
+| Ref | Improvement | Design element | Owner | Due |
+|---|---|---|---|---|
 
 ---
 
@@ -76,8 +95,12 @@ A design conclusion can be reached on the register and the control design table 
 
 **Population.** Assessment results support inferences only about a population resembling the one assessed. If the assessment is run on senior reviewers in unhurried conditions and the operating population is different, the scorecard says so rather than reporting the number alone.
 
-**Regulatory mapping.** Where the organisation deploys high-risk AI systems in the EU, Article 26(2) of Regulation (EU) 2024/1689 requires that natural persons assigned to human oversight have the necessary competence, training and authority. This workpaper produces evidence relevant to that obligation. It is not a compliance opinion.
+**Regulatory mapping.** Where the organisation deploys high-risk AI systems in the EU, Article 26(2) of Regulation (EU) 2024/1689 requires that natural persons assigned to human oversight have the necessary competence, training and authority. This workpaper produces evidence relevant to that obligation: competence from records 01, 03 and 04; training from record 01; authority from record 01 (`authority_to_halt`). It is not a compliance opinion.
+
+**Browser version.** The same workpaper can be assembled in the browser from conclusions already reached in the spreadsheet, with Word, Markdown and Excel export and a check code: see the document builder linked from the root README. The page stores nothing and computes no results.
 
 **Status of this template.** Provided for information. Not legal, compliance or audit advice, and not a compliance opinion. Suitability for a particular organisation, system or jurisdiction is a matter for that organisation and its own advisers.
 
 **Reference.** Turkina, D. (2026). *The Unmonitored Dependency: Human Supervisory Capacity as an Assurance Target in Frontier AI Safety Frameworks.* SSRN 7248205.
+
+**Template licence.** CC BY 4.0, supervisory-capacity-assessment repository (dturkina99). The content entered in a completed workpaper is the preparing organisation's own.

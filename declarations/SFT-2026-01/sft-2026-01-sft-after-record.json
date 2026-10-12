@@ -1,0 +1,222 @@
+{
+  "format": "supervisory-capacity-builder",
+  "version": 3,
+  "doc": "sft",
+  "phase": "after",
+  "current": {
+    "fields": {
+      "h_ref": "SFT-2026-01",
+      "h_prep": "sole researcher",
+      "h_reports": "none; independent researcher with no reporting line",
+      "h_regdate": "2026-10-12",
+      "f_subject": "Recode of the frontier safety frameworks in the Zenodo dataset (10.5281/zenodo.22004430) against the coding frame fixed on 2026-10-12. A keyword search returns the candidate passages; a language model proposes a code for each; the researcher accepts, changes or rejects every one",
+      "f_scopedate": "2026-10-12",
+      "f_start": "2026-10-12, 1 session of about 2 hours",
+      "f_periodby": "the function: the researcher sets the snapshot date of the documents",
+      "f_function": "One researcher, independent, unpaid by any developer in the sample",
+      "f_in": "All frameworks in the dataset as published on the snapshot date; every code in the frame, including the added code capability_operationalized; the authority condition recorded as a separate code",
+      "f_out": "Framework versions published after the snapshot date; how any framework operates inside the developer; whether any framework works; other developer documents (model cards, system cards, blog posts)",
+      "f_volume": "7 framework documents; 57 coded passages",
+      "f_time": "1 session of about 2 hours",
+      "f_budget": "None beyond a model subscription paid by the researcher",
+      "f_readbyperson": "every passage returned by the keyword search; 57 passages",
+      "f_readbytool": "the remainder of each document, searched by keyword and not read",
+      "f_spotchecks": "Calibration: all passages, coded by the researcher before the model is run; disagreement rate recorded",
+      "f_tools": "A keyword search over all seven documents with the term list from the first pass; a language model given the frozen frame as instruction and asked to propose one code per passage; a spreadsheet for the code log",
+      "f_toolrel": "The model is built by one of the developers whose framework is in the sample. Its output on that developer's own document is not neutral evidence",
+      "f_verify": "Every model-proposed code is read against the source passage by the researcher before acceptance. All passages are coded blind first, and the disagreement rate between blind codes and model-assisted codes is published with the recode. No second human coder is available; this is stated, not proxied. Passages that use other words for the same thing are not returned by the search and are not coded; the term list is published.",
+      "r_0_a": "applies",
+      "r_0_h": "Developers hold internal versions and practices that the published frameworks do not show. The recode reads what is published and claims nothing about the rest",
+      "r_1_a": "applies",
+      "r_1_h": "The sample is the frameworks public on the snapshot date. Developers without a published framework, and revisions after that date, are outside it. So are passages that use words not on the term list",
+      "r_2_a": "applies",
+      "r_2_h": "Developers revise frameworks in place, often without version numbers. The dataset records the snapshot date and keeps the copy coded",
+      "r_3_a": "applies",
+      "r_3_h": "Earlier versions are withdrawn from developer sites. Archived copies are used where they exist and their source is recorded",
+      "r_4_a": "applies",
+      "r_4_h": "Model-proposed codes carry an error rate. Every code is reviewed by the researcher; the calibration subset measures the residual disagreement",
+      "r_5_a": "applies",
+      "r_5_h": "A model built by one developer in the sample may read that developer's framework more favourably. Codes on that document are checked in full by hand",
+      "r_6_a": "applies",
+      "r_6_h": "The model's developer is a subject of the study. Its proposals on its own developer's document are treated as prompts to read, never as evidence",
+      "r_7_a": "applies",
+      "r_7_h": "The study reads documents. It has no access to how any framework is applied inside the developer, and makes no claim about that",
+      "r_8_a": "applies",
+      "r_8_h": "Each developer decides what its framework publishes. What a framework omits cannot be found by reading it; absence of a code means absence from the text",
+      "r_9_a": "none",
+      "r_9_h": "No developer reviews the frame, the term list, the codes or the paper before publication",
+      "f_struct": "Unpaid by any developer in the sample; no employment or advisory relationship with any; right to publish",
+      "f_oper": "None: the same person fixed the frame, runs the coding and reads the result",
+      "f_tooling": "Model supplied by one of the subjects, on a subscription paid by the researcher",
+      "f_decline": "If blind codes and model-assisted codes disagree on more than 20% of the calibration passages, the recode is reported as not completed and the first-pass codes stand. If the frame or the term list changes during the pass, the pass stops and is re-registered before restarting"
+    },
+    "tables": {
+      "routes": [
+        {
+          "route": "Communication outside the captured record",
+          "answer": "applies",
+          "how": "Developers hold internal versions and practices that the published frameworks do not show. The recode reads what is published and claims nothing about the rest"
+        },
+        {
+          "route": "Incompleteness of the captured record",
+          "answer": "applies",
+          "how": "The sample is the frameworks public on the snapshot date. Developers without a published framework, and revisions after that date, are outside it. So are passages that use words not on the term list"
+        },
+        {
+          "route": "Records altered by the subjects",
+          "answer": "applies",
+          "how": "Developers revise frameworks in place, often without version numbers. The dataset records the snapshot date and keeps the copy coded"
+        },
+        {
+          "route": "Deletion after the fact",
+          "answer": "applies",
+          "how": "Earlier versions are withdrawn from developer sites. Archived copies are used where they exist and their source is recorded"
+        },
+        {
+          "route": "Error by the analysis tool",
+          "answer": "applies",
+          "how": "Model-proposed codes carry an error rate. Every code is reviewed by the researcher; the calibration subset measures the residual disagreement"
+        },
+        {
+          "route": "Bias of the analysis tool",
+          "answer": "applies",
+          "how": "A model built by one developer in the sample may read that developer's framework more favourably. Codes on that document are checked in full by hand"
+        },
+        {
+          "route": "Deception by the analysis tool",
+          "answer": "applies",
+          "how": "The model's developer is a subject of the study. Its proposals on its own developer's document are treated as prompts to read, never as evidence"
+        },
+        {
+          "route": "No access to the primary subject",
+          "answer": "applies",
+          "how": "The study reads documents. It has no access to how any framework is applied inside the developer, and makes no claim about that"
+        },
+        {
+          "route": "Scope set by the subject",
+          "answer": "applies",
+          "how": "Each developer decides what its framework publishes. What a framework omits cannot be found by reading it; absence of a code means absence from the text"
+        },
+        {
+          "route": "Editorial control by the subject",
+          "answer": "none",
+          "how": "No developer reviews the frame, the term list, the codes or the paper before publication"
+        }
+      ]
+    }
+  },
+  "registered": {
+    "fields": {
+      "h_ref": "SFT-2026-01",
+      "h_prep": "sole researcher",
+      "h_reports": "none; independent researcher with no reporting line",
+      "h_regdate": "2026-10-12",
+      "f_subject": "Recode of the frontier safety frameworks in the Zenodo dataset (10.5281/zenodo.22004430) against the coding frame fixed on 2026-10-12. A keyword search returns the candidate passages; a language model proposes a code for each; the researcher accepts, changes or rejects every one",
+      "f_scopedate": "2026-10-12",
+      "f_start": "2026-10-12, 1 session of about 2 hours",
+      "f_periodby": "the function: the researcher sets the snapshot date of the documents",
+      "f_function": "One researcher, independent, unpaid by any developer in the sample",
+      "f_in": "All frameworks in the dataset as published on the snapshot date; every code in the frame, including the added code capability_operationalized; the authority condition recorded as a separate code",
+      "f_out": "Framework versions published after the snapshot date; how any framework operates inside the developer; whether any framework works; other developer documents (model cards, system cards, blog posts)",
+      "f_volume": "7 framework documents; 57 coded passages",
+      "f_time": "1 session of about 2 hours",
+      "f_budget": "None beyond a model subscription paid by the researcher",
+      "f_readbyperson": "every passage returned by the keyword search; 57 passages",
+      "f_readbytool": "the remainder of each document, searched by keyword and not read",
+      "f_spotchecks": "Calibration: all passages, coded by the researcher before the model is run; disagreement rate recorded",
+      "f_tools": "A keyword search over all seven documents with the term list from the first pass; a language model given the frozen frame as instruction and asked to propose one code per passage; a spreadsheet for the code log",
+      "f_toolrel": "The model is built by one of the developers whose framework is in the sample. Its output on that developer's own document is not neutral evidence",
+      "f_verify": "Every model-proposed code is read against the source passage by the researcher before acceptance. All passages are coded blind first, and the disagreement rate between blind codes and model-assisted codes is published with the recode. No second human coder is available; this is stated, not proxied. Passages that use other words for the same thing are not returned by the search and are not coded; the term list is published.",
+      "r_0_a": "applies",
+      "r_0_h": "Developers hold internal versions and practices that the published frameworks do not show. The recode reads what is published and claims nothing about the rest",
+      "r_1_a": "applies",
+      "r_1_h": "The sample is the frameworks public on the snapshot date. Developers without a published framework, and revisions after that date, are outside it. So are passages that use words not on the term list",
+      "r_2_a": "applies",
+      "r_2_h": "Developers revise frameworks in place, often without version numbers. The dataset records the snapshot date and keeps the copy coded",
+      "r_3_a": "applies",
+      "r_3_h": "Earlier versions are withdrawn from developer sites. Archived copies are used where they exist and their source is recorded",
+      "r_4_a": "applies",
+      "r_4_h": "Model-proposed codes carry an error rate. Every code is reviewed by the researcher; the calibration subset measures the residual disagreement",
+      "r_5_a": "applies",
+      "r_5_h": "A model built by one developer in the sample may read that developer's framework more favourably. Codes on that document are checked in full by hand",
+      "r_6_a": "applies",
+      "r_6_h": "The model's developer is a subject of the study. Its proposals on its own developer's document are treated as prompts to read, never as evidence",
+      "r_7_a": "applies",
+      "r_7_h": "The study reads documents. It has no access to how any framework is applied inside the developer, and makes no claim about that",
+      "r_8_a": "applies",
+      "r_8_h": "Each developer decides what its framework publishes. What a framework omits cannot be found by reading it; absence of a code means absence from the text",
+      "r_9_a": "none",
+      "r_9_h": "No developer reviews the frame, the term list, the codes or the paper before publication",
+      "f_struct": "Unpaid by any developer in the sample; no employment or advisory relationship with any; right to publish",
+      "f_oper": "None: the same person fixed the frame, runs the coding and reads the result",
+      "f_tooling": "Model supplied by one of the subjects, on a subscription paid by the researcher",
+      "f_decline": "If blind codes and model-assisted codes disagree on more than 20% of the calibration passages, the recode is reported as not completed and the first-pass codes stand. If the frame or the term list changes during the pass, the pass stops and is re-registered before restarting"
+    },
+    "tables": {
+      "routes": [
+        {
+          "route": "Communication outside the captured record",
+          "answer": "applies",
+          "how": "Developers hold internal versions and practices that the published frameworks do not show. The recode reads what is published and claims nothing about the rest"
+        },
+        {
+          "route": "Incompleteness of the captured record",
+          "answer": "applies",
+          "how": "The sample is the frameworks public on the snapshot date. Developers without a published framework, and revisions after that date, are outside it. So are passages that use words not on the term list"
+        },
+        {
+          "route": "Records altered by the subjects",
+          "answer": "applies",
+          "how": "Developers revise frameworks in place, often without version numbers. The dataset records the snapshot date and keeps the copy coded"
+        },
+        {
+          "route": "Deletion after the fact",
+          "answer": "applies",
+          "how": "Earlier versions are withdrawn from developer sites. Archived copies are used where they exist and their source is recorded"
+        },
+        {
+          "route": "Error by the analysis tool",
+          "answer": "applies",
+          "how": "Model-proposed codes carry an error rate. Every code is reviewed by the researcher; the calibration subset measures the residual disagreement"
+        },
+        {
+          "route": "Bias of the analysis tool",
+          "answer": "applies",
+          "how": "A model built by one developer in the sample may read that developer's framework more favourably. Codes on that document are checked in full by hand"
+        },
+        {
+          "route": "Deception by the analysis tool",
+          "answer": "applies",
+          "how": "The model's developer is a subject of the study. Its proposals on its own developer's document are treated as prompts to read, never as evidence"
+        },
+        {
+          "route": "No access to the primary subject",
+          "answer": "applies",
+          "how": "The study reads documents. It has no access to how any framework is applied inside the developer, and makes no claim about that"
+        },
+        {
+          "route": "Scope set by the subject",
+          "answer": "applies",
+          "how": "Each developer decides what its framework publishes. What a framework omits cannot be found by reading it; absence of a code means absence from the text"
+        },
+        {
+          "route": "Editorial control by the subject",
+          "answer": "none",
+          "how": "No developer reviews the frame, the term list, the codes or the paper before publication"
+        }
+      ]
+    },
+    "hash": "387a9f9dc1fb0b99ea3acab72b0f7137b3430eae3e765364ca679e4dcb290df1"
+  },
+  "amendments": {},
+  "after": {
+    "f_basis": "Limits published in full: one researcher, no second coder. Keyword-first search, term list published; passages worded outside the list not coded. Model built by one of the subjects; its proposals treated as prompts, not evidence; every accepted code read against its passage. Calibration: all 57 passages across 7 documents were blind-coded before the model was run, as registered; 0 of 57 blind codes differed from the model-assisted code. Zero differences shows agreement between this coder and the model on these passages; it does not show that an independent coder would reproduce them, and a reader cannot distinguish full agreement from an unexercised review. The blind codes and the model proposals are both published. The condition in 8a was not met.",
+    "f_done": "2026-10-12",
+    "f_codesent": "the public, via a post on the repository’s Discussions page (“Declarations”)",
+    "f_codesentdate": "2026-10-12",
+    "f_notsupport": "Any claim that a second, independent coder would reproduce these codes. Any claim about passages the term list did not return. Any claim about how a framework is applied inside the developer, or whether it works. Any claim that the model’s proposals were correct beyond the 57 passages reviewed. Any claim that a reader of the paper can tell, from the paper alone, whether a given passage was coded wrong."
+  },
+  "checks": {},
+  "builder": "0.1 · 2026-10-12",
+  "retrospective": false
+}
