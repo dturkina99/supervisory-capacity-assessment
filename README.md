@@ -59,7 +59,7 @@ The ten fields can be filled in the browser: [document builder](https://dturkina
 
 | Reference | Registered | Check code | Subject | Who |
 |---|---|---|---|---|
-| SFT-2026-01 | 2026-10-12 | `387a9f9d…` | Recode of the paper's dataset for the FAccT 2027 submission | The author, on the author's own study |
+| SFT-2026-01 | 2026-10-12 | `387a9f9d…` | Recode of the paper's dataset for the submission | The author, on the author's own study |
 
 Record file and both PDFs: [`declarations/SFT-2026-01/`](declarations/SFT-2026-01/). A use of the format by its author, not an adoption by another organisation. Declarations from other organisations are listed by role, or by name with permission. A declaration carries roles only and no performance data about individuals.
 
