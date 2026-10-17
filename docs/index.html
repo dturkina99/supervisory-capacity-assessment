@@ -13,7 +13,12 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; form-action 'none'; base-uri 'none'">
 <meta name="referrer" content="no-referrer">
 <title>Supervisory capacity · document builder</title>
-<meta name="description" content="Write the three documents of the supervisory-capacity-assessment repository in the browser: small function track, round register, workpaper. Nothing is sent or stored.">
+<meta name="description" content="Write four audit-format documents on human oversight of AI systems in the browser: small function track, round register, records, workpaper. Nothing is sent or stored.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Supervisory capacity · document builder">
+<meta property="og:description" content="Free browser tool for building audit-format records on human oversight of AI systems. Exports to PDF, Word, Excel and Markdown. Nothing is stored or sent.">
+<meta property="og:url" content="https://dturkina99.github.io/supervisory-capacity-assessment/">
+<meta property="og:image" content="https://dturkina99.github.io/supervisory-capacity-assessment/where-to-start.png">
 <style>
   :root{--ink:#111;--mute:#555;--line:#bbb;--bg:#fff;--panel:#fafafa;}
   *{box-sizing:border-box;}
@@ -189,8 +194,8 @@
 </header>
 
 <section id="start" class="start">
-  <h1 class="lead">Evidence that your human oversight control works.</h1>
-  <p class="leadsub">You are asserting a control you cannot currently evidence. Nothing breaks if you leave it; the first time anyone asks, the answer is that nobody has looked. Four documents, written in the browser, in audit format.</p>
+  <h1 class="lead">How you would know your human oversight control works.</h1>
+  <p class="leadsub">If you assert a control you have not tested, nothing breaks until someone asks. Then the answer is that nobody has looked. Four documents, written in the browser, in audit format.</p>
   <h2>Where to start</h2>
   <p>One question routes you. Not sure? <a href="#small-function-track" onclick="openDoc('sft');setTimeout(loadExample,150);return false;">Open the small function track and load the worked example</a>; it takes two minutes.</p>
   <div class="q"><h3>1 · Could someone else tell whether the reviewer got it wrong?</h3>
@@ -214,7 +219,7 @@
     <p class="get">What you get: <span class="pill">Supported · recorded · qualified</span> <span class="hint" style="display:inline">not determined where a round could not support a reading</span></p></div>
   <p class="alldocs">All documents: <span class="track">Declaration only</span> <a href="#small-function-track" onclick="openDoc('sft');return false;">Small function track</a> <span class="sep">|</span> <span class="track">Full round</span> <a href="#round-register" onclick="openDoc('reg');return false;">Round register</a> · <a href="#records" onclick="openDoc('rec');return false;">Records</a> · <a href="#workpaper" onclick="openDoc('wp');return false;">Workpaper</a></p>
   <p class="links">Read more: <a href="https://doi.org/10.5281/zenodo.23311590">the essay on the European draft standard</a> · <a href="https://doi.org/10.2139/ssrn.7248205">the paper</a> · <a href="https://github.com/dturkina99/supervisory-capacity-assessment">the repository with the templates</a></p>
-  <p class="privacy">This page loads one file and makes no further requests. Nothing you type is stored or sent, and you can confirm that in your browser's network tab. GitHub serves the page and keeps its own server logs under <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>. The documents produced are the user's own records and conclusions. Written in a personal capacity; format provided for information, not advice. Builder &copy; 2026 Diana Turkina, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, as is, without warranty.</p>
+  <p class="privacy">This page loads one file and makes no further requests. Nothing you type is stored or sent, and you can confirm that in your browser's network tab. GitHub serves the page and keeps its own server logs under <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>. The documents produced are the user's own records and conclusions. Not a conformity assessment: prEN 18229-3 and prEN 18228 are drafts. Written in a personal capacity; format provided for information, not advice. Builder &copy; 2026 Diana Turkina, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, as is, without warranty.</p>
 </section>
 
 <section id="builder">
@@ -334,7 +339,7 @@ const DOCS = {
 };
 
 /* ---------- state ---------- */
-const BUILDER_VERSION='0.1 · 2026-10-12';
+const BUILDER_VERSION='0.1.1 · 2026-10-12';
 let docId=null, registered=null, dyn={rounds:[],exceptions:[],improvements:[]}, checks={}, retro=false;
 let exampleValues={}; // id -> value filled by the worked example, until edited
 let pendingVerify=null;
