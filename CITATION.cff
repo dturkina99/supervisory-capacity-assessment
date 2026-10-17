@@ -20,6 +20,10 @@ keywords:
   - conformity assessment
   - internal audit
 license: CC-BY-4.0
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23312403
+    description: Zenodo archive of this repository
 preferred-citation:
   type: article
   title: >-
@@ -43,7 +47,7 @@ references:
         given-names: Diana
         orcid: "https://orcid.org/0009-0004-8584-9376"
     year: 2026
-    version: "1.0"
-    doi: 10.5281/zenodo.23311590
-    url: "https://doi.org/10.5281/zenodo.23311590"
+    version: "1.1"
+    doi: 10.5281/zenodo.23428887
+    url: "https://doi.org/10.5281/zenodo.23428887"
     notes: Companion essay on prEN 18229-3 and prEN 18228.

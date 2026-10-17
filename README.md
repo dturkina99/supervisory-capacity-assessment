@@ -6,9 +6,13 @@ Governance frameworks and the EU AI Act both assign consequential decisions to h
 
 **Paper:** Turkina, D. (2026). *The Unmonitored Dependency: Human Supervisory Capacity as an Assurance Target in Frontier AI Safety Frameworks.* SSRN 7248205. [doi.org/10.2139/ssrn.7248205](https://doi.org/10.2139/ssrn.7248205)
 
+**Responses:** Citations and replies are listed in [docs/RESPONSES.md](docs/RESPONSES.md). Corrections and disputes are welcome in Discussions.
+
 **Data:** Coding sheet, term-search log and text-layer manifest at [doi.org/10.5281/zenodo.22075225](https://doi.org/10.5281/zenodo.22075225), CC BY 4.0.
 
-**Essay:** Turkina, D. (2026). *What a standard specifies about people.* A close reading of prEN 18229-3 (human oversight) and prEN 18228 (AI risk management). PDF in [`docs/`](docs/what-a-standard-specifies.pdf); Zenodo, [doi.org/10.5281/zenodo.23311590](https://doi.org/10.5281/zenodo.23311590).
+**Archive:** Zenodo, [doi.org/10.5281/zenodo.23312403](https://doi.org/10.5281/zenodo.23312403).
+
+**Essay:** Turkina, D. (2026). *What a standard specifies about people.* A clause-level reading of prEN 18229-3 (human oversight) and prEN 18228 (AI risk management). Version 1.1, 16 October 2026. PDF in [`docs/`](docs/what-a-standard-specifies.pdf); Zenodo, [doi.org/10.5281/zenodo.23428887](https://doi.org/10.5281/zenodo.23428887) (version 1.0: [doi.org/10.5281/zenodo.23311590](https://doi.org/10.5281/zenodo.23311590)).
 
 **Use it in the browser:** [open the document builder](https://dturkina99.github.io/supervisory-capacity-assessment/) to write the small function track, the round register or the workpaper and download it as PDF, Word, Markdown or Excel. Nothing you type leaves the page. Document builder version 0.1 (preview); each builder release is pinned at `docs/vX.Y/`.
 
